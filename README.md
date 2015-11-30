@@ -1,2 +1,2 @@
 # vokki
-vokki vocabulary
+vokki - a vocabulary excercise tool based on Java EE
