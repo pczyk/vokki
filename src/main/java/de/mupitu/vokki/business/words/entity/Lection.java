@@ -31,6 +31,9 @@ public class Lection {
     
     @Column
     private String description;
+    
+    @Column
+    private boolean pub;
 
     public long getId() {
         return id;
@@ -70,5 +73,13 @@ public class Lection {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public boolean isPublic() {
+        return pub;
+    }
+    
+    public void setPublic(boolean pub) {
+        this.pub = pub;
     }
 }

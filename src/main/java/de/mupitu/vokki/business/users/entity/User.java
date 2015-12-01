@@ -1,14 +1,20 @@
 package de.mupitu.vokki.business.users.entity;
 
+import static de.mupitu.vokki.business.users.entity.User.findAll;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = findAll, query="SELECT u FROM User u")
 public class User {
 
+    private static final String PREFIX = "de.mupitu.vokki.business.users.entity.";
+    public static final String findAll = PREFIX + "findAll";
+    
     @Id
     @GeneratedValue
     private long id;
