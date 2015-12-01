@@ -22,7 +22,7 @@ public class WordManager {
         return em.find(Word.class, id);
     }
 
-    public List<Word> findByLection(final Lection lection) {
+    public List<Word> getWordsForLection(final Lection lection) {
         return em.createQuery("SELECT w FROM Word w WHERE w.lection=:lection",
                 Word.class).setParameter("lection", lection).getResultList();
     }
