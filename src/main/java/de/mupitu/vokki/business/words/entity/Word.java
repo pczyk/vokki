@@ -15,6 +15,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import static de.mupitu.vokki.business.words.entity.Word.findAll;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -37,13 +39,13 @@ public class Word {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> nativeTerms;
 
-    @Column
+    @Column(nullable = false)
     private String foreignTerm;
 
-    @Column
+    @Column(nullable = false)
     private String comment;
 
-    @Column
+    @Column(nullable = false)
     @Min(value = MIN_LEVEL)
     @Max(value = MAX_LEVEL)
     private int wordLevel;
@@ -51,6 +53,9 @@ public class Word {
     @Column
     private LocalDate lastPracticed;
 
+    @ManyToOne
+    private Lection lection;
+    
     // ------------
     public long getId() {
         return id;
@@ -108,12 +113,23 @@ public class Word {
         this.wordLevel = wordLevel;
     }
 
+    public Lection getLection() {
+        return lection;
+    }
+
+    public void setLection(Lection lection) {
+        this.lection = lection;
+    }
+    
+    // --------------
+    
     public static Word createWord(final String foreignTerm,
-            final Set<String> nativeTerms, final String comment) {
+            final Set<String> nativeTerms, final Lection lection, final String comment) {
         final Word word = new Word();
 
         word.setForeignTerm(foreignTerm);
         word.setNativeTerms(nativeTerms);
+        word.setLection(lection);
         word.setComment(comment);
 
         return word;

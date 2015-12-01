@@ -1,5 +1,6 @@
 package de.mupitu.vokki.business.words.boundary;
 
+import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.business.words.entity.Word;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -19,6 +20,11 @@ public class WordManager {
 
     public Word findById(final long id) {
         return em.find(Word.class, id);
+    }
+
+    public List<Word> findByLection(final Lection lection) {
+        return em.createQuery("SELECT w FROM Word w WHERE w.lection=:lection",
+                Word.class).setParameter("lection", lection).getResultList();
     }
 
     public Word save(final Word word) {
