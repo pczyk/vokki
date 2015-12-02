@@ -2,6 +2,7 @@ package de.mupitu.vokki.presentation;
 
 import de.mupitu.vokki.business.users.boundary.UserManager;
 import de.mupitu.vokki.business.users.entity.User;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -10,8 +11,8 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "userSession")
 @SessionScoped
-public class UserSession {
-
+public class UserSession implements Serializable {
+    
 	private String username;
 	private String password;
 	private User currentUser;
