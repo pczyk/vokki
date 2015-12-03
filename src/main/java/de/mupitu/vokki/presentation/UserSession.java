@@ -61,7 +61,7 @@ public class UserSession implements Serializable {
 			password = null;
 			return "";
 		} else {
-			return "/secured/home?faces-redirect=true";
+			return "/secured/dashboard?faces-redirect=true";
 		}
 	}
 

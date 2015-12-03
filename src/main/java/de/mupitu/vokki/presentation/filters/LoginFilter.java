@@ -15,6 +15,8 @@ import de.mupitu.vokki.presentation.UserSession;
 
 public class LoginFilter implements Filter {
 
+        private static final String LOGIN_TARGET = "/login.xhtml";
+    
 	@Override
 	public void destroy() {
 	}
@@ -31,7 +33,7 @@ public class LoginFilter implements Filter {
 				.getAttribute("userSession");
 
 		if (userSession == null || !userSession.isLoggedIn()) {
-			res.sendRedirect(req.getContextPath() + "/login.jsf");
+			res.sendRedirect(req.getContextPath() + LOGIN_TARGET);
 		} else {
 			chain.doFilter(request, response);
 		}

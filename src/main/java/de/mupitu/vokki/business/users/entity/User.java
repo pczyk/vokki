@@ -31,7 +31,7 @@ public class User {
     @Column(nullable = false)
     private LocalDate registerDate;
     
-    @Column(nullable = false)
+    @Column
     private LocalDate lastLogin;
 
     public long getId() {

@@ -18,6 +18,15 @@
             15
         </session-timeout>
     </session-config>
+    <!-- LoginFilter -->
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>de.mupitu.vokki.presentation.filters.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/secured/*</url-pattern>
+    </filter-mapping> 
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
