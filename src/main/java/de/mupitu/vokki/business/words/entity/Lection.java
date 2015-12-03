@@ -1,6 +1,7 @@
 package de.mupitu.vokki.business.words.entity;
 
 import de.mupitu.vokki.business.users.entity.User;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,8 +33,14 @@ public class Lection {
     @Column
     private String description;
     
-    @Column
+    @Column(nullable = false)
     private boolean pub;
+    
+    @Column(nullable = false)
+    private LocalDate creationDate;
+    
+    @Column
+    private LocalDate modificationDate;
 
     public long getId() {
         return id;
@@ -82,4 +89,29 @@ public class Lection {
     public void setPublic(boolean pub) {
         this.pub = pub;
     }
+
+    public boolean isPub() {
+        return pub;
+    }
+
+    public void setPub(boolean pub) {
+        this.pub = pub;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDate getModificationDate() {
+        return modificationDate;
+    }
+
+    public void setModificationDate(LocalDate modificationDate) {
+        this.modificationDate = modificationDate;
+    }
+    
 }
