@@ -56,6 +56,14 @@ public class Word {
     @ManyToOne
     private Lection lection;
     
+    @Column
+    @Min(value = 0)
+    private int numberOfTests = 0;
+    
+    @Column
+    @Min(value = 0)
+    private int numberOfCorrectAnswers = 0;
+    
     // ------------
     public long getId() {
         return id;
@@ -119,6 +127,22 @@ public class Word {
 
     public void setLection(Lection lection) {
         this.lection = lection;
+    }
+
+    public int getNumberOfTests() {
+        return numberOfTests;
+    }
+
+    public void setNumberOfTests(int numberOfTests) {
+        this.numberOfTests = numberOfTests;
+    }
+
+    public int getNumberOfCorrectAnswers() {
+        return numberOfCorrectAnswers;
+    }
+
+    public void setNumberOfCorrectAnswers(int numberOfCorrectAnswers) {
+        this.numberOfCorrectAnswers = numberOfCorrectAnswers;
     }
     
     // --------------
