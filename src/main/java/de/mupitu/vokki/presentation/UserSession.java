@@ -12,65 +12,67 @@ import javax.faces.context.FacesContext;
 @ManagedBean(name = "userSession")
 @SessionScoped
 public class UserSession implements Serializable {
-    
-	private String username;
-	private String password;
-	private User currentUser;
 
-	private String requestedPage;
+    private String username;
+    private String password;
+    private User currentUser;
 
-	public String getRequestedPage() {
-		return requestedPage;
-	}
+    private String requestedPage;
 
-	public void setRequestedPage(final String requestedPage) {
-		this.requestedPage = requestedPage;
-	}
+    public String getRequestedPage() {
+        return requestedPage;
+    }
 
-	@EJB
-	private UserManager userManager;
+    public void setRequestedPage(final String requestedPage) {
+        this.requestedPage = requestedPage;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    @EJB
+    private UserManager userManager;
 
-	public void setUsername(final String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setUsername(final String username) {
+        this.username = username;
+    }
 
-	public void setPassword(final String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public User getCurrentUser() {
-		return currentUser;
-	}
+    public void setPassword(final String password) {
+        this.password = password;
+    }
 
-	public String login() {
-		currentUser = userManager.checkLogin(username, password);
+    public User getCurrentUser() {
+        return currentUser;
+    }
 
-		if (currentUser == null) {
-			// Error. User not found or wrong credentials
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown login, try again"));
+    public String login() {
+        currentUser = userManager.checkLogin(username, password);
 
-			username = null;
-			password = null;
-			return "";
-		} else {
-			return "/secured/dashboard?faces-redirect=true";
-		}
-	}
+        if (currentUser == null) {
+            // Error. User not found or wrong credentials
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown login, try again"));
 
-	public String logout() {
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "/login?faces-redirect=true";
-	}
+            username = null;
+            password = null;
+            return "";
+        } else {
+            currentUser = userManager.updateLastLogin(currentUser);
+            System.out.println("lastLogin: " + currentUser.getLastLogin());
+            return "/secured/dashboard?faces-redirect=true";
+        }
+    }
 
-	public boolean isLoggedIn() {
-		return currentUser != null;
-	}
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/login?faces-redirect=true";
+    }
+
+    public boolean isLoggedIn() {
+        return currentUser != null;
+    }
 }

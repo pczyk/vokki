@@ -2,6 +2,7 @@ package de.mupitu.vokki.business.users.boundary;
 
 import de.mupitu.vokki.business.users.entity.User;
 import de.unidue.s3.bcrypt.BCrypt;
+import java.time.LocalDate;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -52,5 +53,11 @@ public class UserManager {
         }
 
         return null;
+    }
+    
+    public User updateLastLogin(final User user) {
+        final User attachedUser = findById(user.getId());
+        attachedUser.setLastLogin(LocalDate.now());
+        return save(attachedUser);
     }
 }

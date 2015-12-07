@@ -1,15 +1,22 @@
 package de.mupitu.vokki.business.users.entity;
 
 import static de.mupitu.vokki.business.users.entity.User.findAll;
+import de.mupitu.vokki.business.words.entity.Language;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @NamedQuery(name = findAll, query="SELECT u FROM User u")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class User {
 
     private static final String PREFIX = "de.mupitu.vokki.business.users.entity.";
@@ -33,6 +40,9 @@ public class User {
     
     @Column
     private LocalDate lastLogin;
+    
+    @ManyToOne(optional = false)
+    private Language language;
 
     public long getId() {
         return id;
@@ -80,6 +90,14 @@ public class User {
 
     public void setLastLogin(LocalDate lastLogin) {
         this.lastLogin = lastLogin;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
     
 }
