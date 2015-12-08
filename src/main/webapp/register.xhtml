@@ -16,6 +16,10 @@
             <p:inputText value="#{register.newUser.emailAddress}" placeholder="E-Mail" /><br />
             <p:password value="#{register.password}" placeholder="Passwort" /><br />
             <p:password value="#{register.passwordRepeat}" placeholder="Passwort (Wiederholung)" /><br />
+            <p:selectOneMenu value="#{register.language}" converter="omnifaces.SelectItemsConverter">
+                <f:selectItem itemLabel="Sprache" noSelectionOption="true" />
+                <f:selectItems value="#{register.languages}" var="lang" itemLabel="#{lang.name}" />
+            </p:selectOneMenu><br />
             <p:commandButton value="Registrieren" action="#{register.registerNewUser()}" />
         </h:form>
     </h:body>
