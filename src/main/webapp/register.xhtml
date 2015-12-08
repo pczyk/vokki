@@ -12,15 +12,17 @@
         <h1>Registrierung</h1>
 
         <h:form>
-            <p:inputText value="#{register.newUser.login}" placeholder="Benutzername" /><br />
-            <p:inputText value="#{register.newUser.emailAddress}" placeholder="E-Mail" /><br />
-            <p:password value="#{register.password}" placeholder="Passwort" /><br />
-            <p:password value="#{register.passwordRepeat}" placeholder="Passwort (Wiederholung)" /><br />
-            <p:selectOneMenu value="#{register.language}" converter="omnifaces.SelectItemsConverter">
-                <f:selectItem itemLabel="Sprache" noSelectionOption="true" />
-                <f:selectItems value="#{register.languages}" var="lang" itemLabel="#{lang.name}" />
-            </p:selectOneMenu><br />
-            <p:commandButton value="Registrieren" action="#{register.registerNewUser()}" />
+            <p:panel id="values">
+                <p:inputText id="username" value="#{register.newUser.username}" placeholder="Benutzername" validator="usernameValidator" /><p:message for="username" /><br />
+                <p:inputText value="#{register.newUser.emailAddress}" placeholder="E-Mail" /><br />
+                <p:password value="#{register.password}" placeholder="Passwort" /><br />
+                <p:password value="#{register.passwordRepeat}" placeholder="Passwort (Wiederholung)" /><br />
+                <p:selectOneMenu value="#{register.language}" converter="omnifaces.SelectItemsConverter">
+                    <f:selectItem itemLabel="Sprache" noSelectionOption="true" />
+                    <f:selectItems value="#{register.languages}" var="lang" itemLabel="#{lang.name}" />
+                </p:selectOneMenu><br />
+                <p:commandButton value="Registrieren" update="values" action="#{register.registerNewUser()}" />
+            </p:panel>
         </h:form>
     </h:body>
 </html>

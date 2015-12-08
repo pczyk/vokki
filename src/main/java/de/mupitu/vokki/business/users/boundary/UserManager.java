@@ -23,6 +23,16 @@ public class UserManager {
         return em.createNamedQuery(User.findAll).getResultList();
     }
 
+    public User findByUsername(final String username) {
+        final List<User> users = em.createQuery("SELECT u FROM User u WHERE u.username=:username", User.class).setParameter("username", username).getResultList();
+        
+        if(users == null || users.isEmpty()) {
+            return null;
+        } else {
+            return users.get(0);
+        }
+    }
+
     public User save(final User user) {
         return em.merge(user);
     }
@@ -36,9 +46,9 @@ public class UserManager {
         }
     }
 
-    public User checkLogin(final String login, final String password) {
-        final List<User> users = (List<User>) em.createQuery("FROM User u WHERE u.login=:login", User.class)
-                .setParameter("login", login).getResultList();
+    public User checkLogin(final String username, final String password) {
+        final List<User> users = (List<User>) em.createQuery("FROM User u WHERE u.username=:username", User.class)
+                .setParameter("username", username).getResultList();
 
         final User user;
 
@@ -54,7 +64,7 @@ public class UserManager {
 
         return null;
     }
-    
+
     public User updateLastLogin(final User user) {
         final User attachedUser = findById(user.getId());
         attachedUser.setLastLogin(LocalDate.now());

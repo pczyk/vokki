@@ -67,7 +67,7 @@ public class Register implements Serializable {
     }
     
     public void registerNewUser() {
-        System.out.println("newUser.login=" + newUser.getLogin());
+        System.out.println("newUser.login=" + newUser.getUsername());
         System.out.println("newUser.emailAddress=" + newUser.getEmailAddress());
         System.out.println("password=" + password);
         System.out.println("passwordRepeat=" + passwordRepeat);
