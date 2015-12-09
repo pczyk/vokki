@@ -25,6 +25,11 @@ public class UsernameValidatorTest {
     }
 
     @Test(expected = ValidatorException.class)
+    public void validateValueNoString() {
+        validator.validate(null, null, new Object());
+    }
+
+    @Test(expected = ValidatorException.class)
     public void validateValueEmpty() {
         validator.validate(null, null, "");
     }
