@@ -25,8 +25,18 @@ public class UserManager {
 
     public User findByUsername(final String username) {
         final List<User> users = em.createQuery("SELECT u FROM User u WHERE u.username=:username", User.class).setParameter("username", username).getResultList();
-        
-        if(users == null || users.isEmpty()) {
+
+        if (users == null || users.isEmpty()) {
+            return null;
+        } else {
+            return users.get(0);
+        }
+    }
+
+    public User findByEmailAddress(final String emailAddress) {
+        final List<User> users = em.createQuery("SELECT u FROM User u WHERE u.emailAddress=:emailAddress", User.class).setParameter("emailAddress", emailAddress).getResultList();
+
+        if (users == null || users.isEmpty()) {
             return null;
         } else {
             return users.get(0);

@@ -14,7 +14,7 @@
         <h:form>
             <p:panel id="values">
                 <p:inputText id="username" value="#{register.newUser.username}" placeholder="Benutzername" validator="usernameValidator" /><p:message for="username" /><br />
-                <p:inputText value="#{register.newUser.emailAddress}" placeholder="E-Mail" /><br />
+                <p:inputText id="emailAddress" value="#{register.newUser.emailAddress}" placeholder="E-Mail" validator="emailAddressValidator" /><p:message for="emailAddress" /><br />
                 <p:password value="#{register.password}" placeholder="Passwort" /><br />
                 <p:password value="#{register.passwordRepeat}" placeholder="Passwort (Wiederholung)" /><br />
                 <p:selectOneMenu value="#{register.language}" converter="omnifaces.SelectItemsConverter">
