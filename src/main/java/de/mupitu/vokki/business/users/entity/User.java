@@ -2,6 +2,7 @@ package de.mupitu.vokki.business.users.entity;
 
 import static de.mupitu.vokki.business.users.entity.User.findAll;
 import de.mupitu.vokki.business.words.entity.Language;
+import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQuery(name = findAll, query="SELECT u FROM User u")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class User {
+public class User implements Serializable {
 
     private static final String PREFIX = "de.mupitu.vokki.business.users.entity.";
     public static final String findAll = PREFIX + "findAll";

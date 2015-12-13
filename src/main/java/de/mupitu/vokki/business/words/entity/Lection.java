@@ -1,6 +1,7 @@
 package de.mupitu.vokki.business.words.entity;
 
 import de.mupitu.vokki.business.users.entity.User;
+import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Lection {
+public class Lection implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -87,14 +88,6 @@ public class Lection {
     }
     
     public void setPublic(boolean pub) {
-        this.pub = pub;
-    }
-
-    public boolean isPub() {
-        return pub;
-    }
-
-    public void setPub(boolean pub) {
         this.pub = pub;
     }
 

@@ -15,14 +15,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import static de.mupitu.vokki.business.words.entity.Word.findAll;
+import java.io.Serializable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 @NamedQuery(name = findAll, query = "SELECT w FROM Word w")
-public class Word {
+public class Word implements Serializable {
 
     // ----- Named Queries -----
     

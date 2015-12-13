@@ -1,20 +1,21 @@
 package de.mupitu.vokki.business.words.entity;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Language {
+public class Language implements Serializable {
 
     @Id
     @GeneratedValue
     private long id;
-    
+
     @Column(nullable = false)
     private String name;
-    
+
     @Column
     private String flagPath;
 
@@ -46,5 +47,5 @@ public class Language {
     public String toString() {
         return String.format("%s[id=%d]", getClass().getSimpleName(), getId());
     }
-   
+
 }
