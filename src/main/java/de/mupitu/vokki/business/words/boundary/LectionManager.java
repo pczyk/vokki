@@ -3,6 +3,7 @@ package de.mupitu.vokki.business.words.boundary;
 import de.mupitu.vokki.business.users.entity.User;
 import de.mupitu.vokki.business.words.entity.Language;
 import de.mupitu.vokki.business.words.entity.Lection;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,6 +48,7 @@ public class LectionManager {
     }
 
     public Lection save(final Lection lection) {
+        lection.setCreationDate(LocalDate.now());
         return em.merge(lection);
     }
 

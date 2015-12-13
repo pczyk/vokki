@@ -29,6 +29,9 @@ public class Lection implements Serializable {
     private Language language;
     
     @ManyToOne
+    private Language baseLanguage;
+    
+    @ManyToOne
     private User owner;
     
     @Column
@@ -106,5 +109,12 @@ public class Lection implements Serializable {
     public void setModificationDate(LocalDate modificationDate) {
         this.modificationDate = modificationDate;
     }
-    
+
+    public Language getBaseLanguage() {
+        return baseLanguage;
+    }
+
+    public void setBaseLanguage(Language baseLanguage) {
+        this.baseLanguage = baseLanguage;
+    }
 }

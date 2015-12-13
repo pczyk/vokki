@@ -9,7 +9,9 @@
     <h:body>
         <h1>Dashboard</h1>
         
-        <p>Hallo, <h:outputText value="#{userSession.currentUser.login}" />!</p>
+        <p>Hallo, <h:outputText value="#{userSession.currentUser.username}" />!</p>
+        
+        <p><p:link outcome="lections" value="Lektionen" /></p>
         
         <p><h:form><p:commandLink action="#{userSession.logout()}" value="Logout" /></h:form></p>
     </h:body>

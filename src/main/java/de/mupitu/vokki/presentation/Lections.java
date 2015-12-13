@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
 
 @ManagedBean
 @ViewScoped
@@ -22,7 +22,7 @@ public class Lections implements Serializable {
     @EJB
     private LectionManager lectionManager;
     
-    @Inject
+    @ManagedProperty(value = "#{userSession}")
     private UserSession userSession;
     
     private List<Language> languages;
@@ -49,4 +49,13 @@ public class Lections implements Serializable {
             return Collections.EMPTY_LIST;
         }
     }
+
+    public UserSession getUserSession() {
+        return userSession;
+    }
+
+    public void setUserSession(UserSession userSession) {
+        this.userSession = userSession;
+    }
+    
 }
