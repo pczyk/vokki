@@ -6,8 +6,10 @@ import de.mupitu.vokki.business.words.entity.Language;
 import de.mupitu.vokki.business.words.entity.Lection;
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -29,7 +31,10 @@ public class Lections implements Serializable {
     
     private Map<Language, List<Lection>> lections;
     
+    private Map<Lection, Long> wordCount = new HashMap<>();
+    
     private User user;
+    
     
     @PostConstruct
     public void init() {
@@ -42,7 +47,7 @@ public class Lections implements Serializable {
         return languages;
     }
     
-    public List<Lection> getLectionByLanguage(final Language language) {
+    public List<Lection> getLectionsByLanguage(final Language language) {
         if(lections.containsKey(language)) {
             return lections.get(language);
         } else {

@@ -3,15 +3,44 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>vokki.org</title>
     </h:head>
     <h:body>
         <h1>Lektionen</h1>
-        
+
         <ui:repeat value="#{lections.languages}" var="language">
-            <p><h:outputText value="#{language.name}" /></p>
+            <p:panel>
+                <f:facet name="header">
+                    <h:outputText value="#{language.name}" />    
+                </f:facet>
+
+                <p:dataTable  value="#{lections.getLectionsByLanguage(language)}" var="lection">
+                    <p:column>
+                        <f:facet name="header">
+                            Lektion
+                        </f:facet>
+                        
+                        <h:outputText value="#{lection.name}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            Beschreibung
+                        </f:facet>
+                        
+                        <h:outputText value="#{lection.description}" />
+                    </p:column>
+                </p:dataTable>
+
+                <p:commandLink value="Neue Lektion erstellen" onclick="PF('dialog').show()" />
+
+                <p:dialog showEffect="fade" hideEffect="explode" widgetVar="dialog">
+                    <h:outputText value="#{lections.newLectionLanguage}" />
+                </p:dialog>
+            </p:panel>
         </ui:repeat>
     </h:body>
 </html>

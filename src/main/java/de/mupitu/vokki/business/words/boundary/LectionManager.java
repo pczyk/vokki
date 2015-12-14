@@ -19,27 +19,33 @@ public class LectionManager {
     @PersistenceContext(name = "vokkiPU")
     private EntityManager em;
 
+    public long countWordsForLection(final Lection lection) {
+        return em.createQuery("SELECT COUNT (*) FROM Word w WHERE w.lection=:lection", Long.class)
+                .setParameter("lection", lection)
+                .getSingleResult();
+    }
+
     public List<Lection> getLectionsForUser(final User user) {
         return em.createQuery("SELECT l FROM Lection l WHERE l.owner=:owner",
                 Lection.class).setParameter("owner", user).getResultList();
     }
-    
+
     public Map<Language, List<Lection>> getLectionsByLanguageForUser(final User user) {
         final Map<Language, List<Lection>> mappedLections = new HashMap<>();
-        
+
         getLectionsForUser(user).stream().forEach((lection) -> {
             final Language language = lection.getLanguage();
-            
+
             List<Lection> list = mappedLections.get(language);
-            
-            if(list == null) {
+
+            if (list == null) {
                 list = new LinkedList<>();
                 mappedLections.put(language, list);
             }
-            
+
             list.add(lection);
         });
-        
+
         return mappedLections;
     }
 
