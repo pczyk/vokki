@@ -15,33 +15,41 @@ import de.mupitu.vokki.presentation.UserSession;
 
 public class LoginFilter implements Filter {
 
-        private static final String LOGIN_TARGET = "/login.xhtml";
-    
-	@Override
-	public void destroy() {
-	}
+    private static final String LOGIN_TARGET = "/login.xhtml";
+    private static final String URI_PREFIX = "/vokki/";
 
-	@Override
-	public void doFilter(final ServletRequest request,
-			final ServletResponse response, final FilterChain chain)
-			throws IOException, ServletException {
+    @Override
+    public void destroy() {
+    }
 
-		final HttpServletRequest req = (HttpServletRequest) request;
-		final HttpServletResponse res = (HttpServletResponse) response;
+    @Override
+    public void doFilter(final ServletRequest request,
+            final ServletResponse response, final FilterChain chain)
+            throws IOException, ServletException {
 
-		final UserSession userSession = (UserSession) req.getSession()
-				.getAttribute("userSession");
+        final HttpServletRequest req = (HttpServletRequest) request;
+        final HttpServletResponse res = (HttpServletResponse) response;
 
-		if (userSession == null || !userSession.isLoggedIn()) {
-			res.sendRedirect(req.getContextPath() + LOGIN_TARGET);
-		} else {
-			chain.doFilter(request, response);
-		}
+        final UserSession userSession = (UserSession) req.getSession()
+                .getAttribute("userSession");
 
-	}
+        if (userSession == null) {
+            redirectToLoginPage(req, res);
+        } else if (!userSession.isLoggedIn()) {
+            userSession.setRequestedPage(req.getRequestURI().replace(URI_PREFIX, ""));
+            redirectToLoginPage(req, res);
+        } else {
+            chain.doFilter(request, response);
+        }
 
-        @Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-	}
+    }
 
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    private void redirectToLoginPage(final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() + LOGIN_TARGET);
+    }
 }

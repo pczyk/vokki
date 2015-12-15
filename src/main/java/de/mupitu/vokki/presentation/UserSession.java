@@ -62,8 +62,14 @@ public class UserSession implements Serializable {
             return "";
         } else {
             currentUser = userManager.updateLastLogin(currentUser);
-            System.out.println("lastLogin: " + currentUser.getLastLogin());
-            return "/secured/dashboard?faces-redirect=true";
+            
+            if(requestedPage != null) {
+                System.out.println("requested page = " + requestedPage);
+                return requestedPage;
+            } else {
+                System.out.println("redirect to dashboard");
+                return "/secured/dashboard?faces-redirect=true";
+            }
         }
     }
 
