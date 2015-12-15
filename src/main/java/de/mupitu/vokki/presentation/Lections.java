@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -77,7 +76,7 @@ public class Lections implements Serializable {
     }
 
     public void createLection() {
-        lectionManager.createLection(newLectionName, newLectionName, user);
+        lectionManager.createLection(newLectionName, newLectionLanguage, newLectionDescription, user);
 
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -109,5 +108,4 @@ public class Lections implements Serializable {
         this.newLectionLanguage = newLectionLanguage;
     }
 
-    
 }

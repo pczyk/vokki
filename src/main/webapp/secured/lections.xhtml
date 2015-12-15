@@ -16,19 +16,34 @@
         <h:form>
             <p:commandLink value="Neue Lektion erstellen" onclick="PF('dialog').show()" />
         </h:form>
- 
+
+        <h:form>
+            <p:dialog showEffect="fade" hideEffect="explode" widgetVar="dialog" modal="true" header="Neue Lektion erstellen">
+                <p:inputText placeholder="Lektionsname" value="#{lections.newLectionName}" /><br />
+                <p:inputTextarea placeholder="Beschreibung" value="#{lections.newLectionDescription}" /><br />
+                <p:selectOneMenu value="#{lections.newLectionLanguage}" converter="omnifaces.SelectItemsConverter">
+                    <f:selectItem itemLabel="Sprache" noSelectionOption="true" />
+                    <f:selectItems value="#{lections.languages}" var="lang" itemLabel="#{lang.name}" />
+                </p:selectOneMenu><br />
+                <f:facet name="footer">
+                    <p:commandButton value="Lektion anlegen" update="@all" actionListener="#{lections.createLection()}"
+                                     oncomplete="handleNewLectionRequest(xhr, status, args)" />
+                </f:facet> 
+            </p:dialog>
+        </h:form>
+
 
         <script type="text/javascript">
-            function handleLoginRequest(xhr, status, args) {
+            function handleNewLectionRequest(xhr, status, args) {
                 if (args.validationFailed || !args.loggedIn) {
                     PF('dialog').jq.effect("shake", {times: 5}, 100);
                 } else {
                     PF('dialog').hide();
-                    $('#loginLink').fadeOut();
                 }
             }
         </script>
-        <ui:repeat value="#{lections.languagesForUser}" var="language" id="languages">
+
+        <ui:repeat value="#{lections.languagesForUser}" var="language">
             <p:panel>
                 <f:facet name="header">
                     <h:outputText value="#{language.name}" />    
@@ -53,19 +68,6 @@
                 </p:dataTable>
             </p:panel>
         </ui:repeat>
-
-        <h:form>
-
-            <p:inputText placeholder="Lektionsname" value="#{lections.newLectionName}" /><br />
-            <p:inputTextarea placeholder="Beschreibung" value="#{lections.newLectionDescription}" /><br />
-            <p:selectOneMenu value="#{lections.newLectionLanguage}" converter="omnifaces.SelectItemsConverter">
-                <f:selectItem itemLabel="Sprache" noSelectionOption="true" />
-                <f:selectItems value="#{lections.languages}" var="lang" itemLabel="#{lang.name}" />
-            </p:selectOneMenu><br />
-
-            <p:commandButton value="Lektion anlegen" update="languages messages" actionListener="#{lections.createLection()}"
-                             oncomplete="handleLoginRequest(xhr, status, args)" />
-        </h:form>
     </h:body>
 </html>
 

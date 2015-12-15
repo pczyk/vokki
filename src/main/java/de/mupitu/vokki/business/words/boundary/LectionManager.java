@@ -67,9 +67,10 @@ public class LectionManager {
         }
     }
     
-    public Lection createLection(final String name, final String description, final User user) {
+    public Lection createLection(final String name, final Language language, final String description, final User user) {
         final Lection lection = new Lection();
         
+        lection.setLanguage(language);
         lection.setBaseLanguage(user.getLanguage());
         lection.setCreationDate(LocalDate.now());
         lection.setDescription(description);
