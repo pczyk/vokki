@@ -1,8 +1,8 @@
 package de.mupitu.vokki.business.users.entity;
 
+import de.mupitu.vokki.business.JPAEntity;
 import static de.mupitu.vokki.business.users.entity.User.findAll;
-import de.mupitu.vokki.business.words.entity.Language;
-import java.io.Serializable;
+import de.mupitu.vokki.business.words.entity.Language;;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQuery(name = findAll, query="SELECT u FROM User u")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class User implements Serializable {
+public class User extends JPAEntity {
 
     private static final String PREFIX = "de.mupitu.vokki.business.users.entity.";
     public static final String findAll = PREFIX + "findAll";
@@ -45,11 +45,13 @@ public class User implements Serializable {
     @ManyToOne(optional = false)
     private Language language;
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 

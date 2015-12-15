@@ -1,5 +1,6 @@
 package de.mupitu.vokki.business.words.entity;
 
+import de.mupitu.vokki.business.JPAEntity;
 import de.mupitu.vokki.business.users.entity.User;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Lection implements Serializable {
+public class Lection extends JPAEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -46,11 +47,13 @@ public class Lection implements Serializable {
     @Column
     private LocalDate modificationDate;
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 

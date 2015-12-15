@@ -1,5 +1,6 @@
 package de.mupitu.vokki.business.words.entity;
 
+import de.mupitu.vokki.business.JPAEntity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Language implements Serializable {
+public class Language extends JPAEntity {
 
     @Id
     @GeneratedValue
@@ -19,11 +20,13 @@ public class Language implements Serializable {
     @Column
     private String flagPath;
 
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 

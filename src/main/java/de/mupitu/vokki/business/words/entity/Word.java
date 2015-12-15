@@ -1,5 +1,6 @@
 package de.mupitu.vokki.business.words.entity;
 
+import de.mupitu.vokki.business.JPAEntity;
 import java.time.LocalDate;
 import java.util.Set;
 import javax.persistence.Column;
@@ -15,14 +16,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import static de.mupitu.vokki.business.words.entity.Word.findAll;
-import java.io.Serializable;
 import javax.persistence.ManyToOne;
 
 @Entity
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
 @NamedQuery(name = findAll, query = "SELECT w FROM Word w")
-public class Word implements Serializable {
+public class Word extends JPAEntity {
 
     // ----- Named Queries -----
     
@@ -65,11 +65,13 @@ public class Word implements Serializable {
     private int numberOfCorrectAnswers = 0;
     
     // ------------
-    public long getId() {
+    @Override
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 
