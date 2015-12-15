@@ -2,7 +2,6 @@ package de.mupitu.vokki.business.words.entity;
 
 import de.mupitu.vokki.business.JPAEntity;
 import de.mupitu.vokki.business.users.entity.User;
-import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,13 +25,13 @@ public class Lection extends JPAEntity {
     @Column(nullable = false)
     private String name;
     
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Language language;
     
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Language baseLanguage;
     
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User owner;
     
     @Column

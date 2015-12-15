@@ -53,7 +53,7 @@ public class Word extends JPAEntity {
     @Column
     private LocalDate lastPracticed;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Lection lection;
     
     @Column
