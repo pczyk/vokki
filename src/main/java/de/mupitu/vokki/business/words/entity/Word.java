@@ -30,7 +30,7 @@ public class Word extends JPAEntity {
     public static final String findAll = PREFIX + "findAll";
     
     public static final int MIN_LEVEL = 0;
-    public static final int MAX_LEVEL = 7;
+    public static final int MAX_LEVEL = 6;
 
     @Id
     @GeneratedValue
@@ -52,6 +52,9 @@ public class Word extends JPAEntity {
 
     @Column
     private LocalDate lastPracticed;
+    
+    @Column
+    private LocalDate lastRelegation;
 
     @ManyToOne(optional = false)
     private Lection lection;
@@ -145,6 +148,14 @@ public class Word extends JPAEntity {
 
     public void setNumberOfCorrectAnswers(int numberOfCorrectAnswers) {
         this.numberOfCorrectAnswers = numberOfCorrectAnswers;
+    }
+
+    public LocalDate getLastRelegation() {
+        return lastRelegation;
+    }
+
+    public void setLastRelegation(LocalDate lastRelegation) {
+        this.lastRelegation = lastRelegation;
     }
     
     // --------------

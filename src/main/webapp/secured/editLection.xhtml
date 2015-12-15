@@ -19,6 +19,10 @@
         
         <h:outputText value="#{editLection.lection.language.name}" rendered="#{editLection.lection ne null}" />
         
+        <p:dataTable value="#{editLection.words}">
+                        
+        </p:dataTable>
+        
         <p:link outcome="lections" value="Zu Lektionen zurückkehren" />
     </h:body>
 </html>
