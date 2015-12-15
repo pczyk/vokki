@@ -1,15 +1,28 @@
 package de.mupitu.vokki.business.words.entity;
 
 import de.mupitu.vokki.business.JPAEntity;
-import java.io.Serializable;
+
+import static de.mupitu.vokki.business.words.entity.Language.findAll;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@NamedQuery(name = findAll, query = "SELECT l FROM Language l")
 public class Language extends JPAEntity {
 
+    // ----- Named Queries -----
+    
+    static final String PREFIX = "de.mupitu.vokki.business.words.entity.Language.";
+    public static final String findAll = PREFIX + "findAll";
+    
     @Id
     @GeneratedValue
     private long id;
@@ -38,6 +51,10 @@ public class Language extends JPAEntity {
         this.name = name;
     }
 
+    /**
+     * Gets the path to the image showing the language's associated flag
+     * @return path to flag image path
+     */
     public String getFlagPath() {
         return flagPath;
     }

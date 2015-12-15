@@ -2,6 +2,7 @@ package de.mupitu.vokki.business.words.entity;
 
 import de.mupitu.vokki.business.JPAEntity;
 import de.mupitu.vokki.business.users.entity.User;
+import static de.mupitu.vokki.business.words.entity.Lection.findForUser;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,33 +19,39 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
+@NamedQueries(value = {
+    @NamedQuery(name = findForUser, query = "SELECT l FROM Lection l WHERE l.owner=:owner")})
 public class Lection extends JPAEntity {
+
+    // ----- Named Queries -----
+    static final String PREFIX = "de.mupitu.vokki.business.words.entity.Language.";
+    public static final String findForUser = PREFIX + "findForUser";
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
-    
+
     @Column(nullable = false)
     private String name;
-    
+
     @ManyToOne(optional = false)
     private Language language;
-    
+
     @ManyToOne(optional = false)
     private Language baseLanguage;
-    
+
     @ManyToOne(optional = false)
     private User owner;
-    
+
     @Column
     private String description;
-    
+
     @Column(nullable = false)
     private boolean pub;
-    
+
     @Column(nullable = false)
     private LocalDate creationDate;
-    
+
     @Column
     private LocalDate modificationDate;
 
@@ -87,11 +96,11 @@ public class Lection extends JPAEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public boolean isPublic() {
         return pub;
     }
-    
+
     public void setPublic(boolean pub) {
         this.pub = pub;
     }

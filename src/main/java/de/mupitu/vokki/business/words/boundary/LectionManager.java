@@ -32,7 +32,7 @@ public class LectionManager {
     }
 
     public List<Lection> getLectionsForUser(final User user) {
-        return em.createQuery("SELECT l FROM Lection l WHERE l.owner=:owner",
+        return em.createNamedQuery(Lection.findForUser,
                 Lection.class).setParameter("owner", user).getResultList();
     }
 
