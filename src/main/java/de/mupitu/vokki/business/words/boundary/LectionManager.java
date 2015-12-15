@@ -66,4 +66,16 @@ public class LectionManager {
             // nothing to do here.
         }
     }
+    
+    public Lection createLection(final String name, final String description, final User user) {
+        final Lection lection = new Lection();
+        
+        lection.setBaseLanguage(user.getLanguage());
+        lection.setCreationDate(LocalDate.now());
+        lection.setDescription(description);
+        lection.setName(name);
+        lection.setOwner(user);
+
+        return save(lection);
+    }
 }
