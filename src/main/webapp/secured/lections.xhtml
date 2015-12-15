@@ -65,13 +65,23 @@
 
                         <h:outputText value="#{lection.description}" />
                     </p:column>
-                    
+
                     <p:column>
                         <f:facet name="header">
                             Wörter
                         </f:facet>
 
                         <h:outputText value="#{lections.getNumberOfWordsInLection(lection)}" />
+                    </p:column>        
+
+                    <p:column>
+                        <f:facet name="header">
+                            Aktion
+                        </f:facet>
+
+                        <p:button icon="fa-edit" outcome="editLection">
+                            <f:param name="id" value="#{lection.id}" />                            
+                        </p:button>
                     </p:column>                    
                 </p:dataTable>
             </p:panel>
