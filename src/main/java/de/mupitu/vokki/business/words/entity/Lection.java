@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Lection extends JPAEntity {
 
     // ----- Named Queries -----
-    static final String PREFIX = "de.mupitu.vokki.business.words.entity.Language.";
+    static final String PREFIX = "de.mupitu.vokki.business.words.entity.Lection.";
     public static final String findForUser = PREFIX + "findForUser";
 
     @Id
