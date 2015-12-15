@@ -5,6 +5,8 @@ import de.mupitu.vokki.business.words.entity.Language;
 import de.mupitu.vokki.business.words.entity.Lection;
 import de.unidue.s3.bcrypt.BCrypt;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -15,10 +17,13 @@ import javax.persistence.PersistenceContext;
 @Startup
 public class DatabasePopulator {
     
+    Logger logger = Logger.getLogger(DatabasePopulator.class.getName());
+    
     @PersistenceContext(name = "vokkiPU")
     private EntityManager em;
     
     private User userMartin;
+    private User userJohn;
     
     private Language languageGerman;
     private Language languageEnglish;
@@ -29,8 +34,10 @@ public class DatabasePopulator {
     public void init() {
         createLanguages();
         userMartin = createUser("martin", "martin", "info@example.com", languageGerman);
+        userJohn = createUser("john", "john", "john.doe@example.com", languageEnglish);
         createLection("Lection I", "My first lection", languageEnglish, languageGerman, userMartin);
         createLection("Lezione Uno", "Buon giorno!", languageItalian, languageGerman, userMartin);
+        createLection("Lektion Eins", "Meine erste Lektion", languageGerman, languageEnglish, userJohn);
     }
     
     private void createLanguages() {
@@ -48,6 +55,8 @@ public class DatabasePopulator {
         
         em.persist(language);
         
+        logger.info("Language created: " + language.toString());
+        
         return language;
     }
     
@@ -61,6 +70,8 @@ public class DatabasePopulator {
         user.setLanguage(lang);
         
         em.persist(user);
+        
+        logger.info("User created: " + user.toString());
         
         return user;
     }
@@ -78,6 +89,8 @@ public class DatabasePopulator {
         lection.setBaseLanguage(baseLanguage);
         
         em.persist(lection);
+        
+        logger.info("Lection created: " + lection.toString());
         
         return lection;
     }
