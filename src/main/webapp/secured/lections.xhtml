@@ -65,6 +65,14 @@
 
                         <h:outputText value="#{lection.description}" />
                     </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            Wörter
+                        </f:facet>
+
+                        <h:outputText value="#{lections.getNumberOfWordsInLection(lection)}" />
+                    </p:column>                    
                 </p:dataTable>
             </p:panel>
         </ui:repeat>

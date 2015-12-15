@@ -19,6 +19,12 @@ public class LectionManager {
     @PersistenceContext(name = "vokkiPU")
     private EntityManager em;
 
+    /**
+     * Counts the number of words for a given <code>lection</code>.
+     *
+     * @param lection this methods counts the number of this lection
+     * @return number of words in <code>lection</code>
+     */
     public long countWordsForLection(final Lection lection) {
         return em.createQuery("SELECT COUNT (*) FROM Word w WHERE w.lection=:lection", Long.class)
                 .setParameter("lection", lection)
@@ -66,10 +72,10 @@ public class LectionManager {
             // nothing to do here.
         }
     }
-    
+
     public Lection createLection(final String name, final Language language, final String description, final User user) {
         final Lection lection = new Lection();
-        
+
         lection.setLanguage(language);
         lection.setBaseLanguage(user.getLanguage());
         lection.setCreationDate(LocalDate.now());

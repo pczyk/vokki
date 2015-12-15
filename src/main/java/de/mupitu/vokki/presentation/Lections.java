@@ -36,7 +36,7 @@ public class Lections implements Serializable {
 
     private Map<Language, List<Lection>> lections;
 
-    private Map<Lection, Long> wordCount = new HashMap<>();
+    private Map<Lection, Long> numberOfWordsPerLection = new HashMap<>();
 
     private User user;
 
@@ -49,6 +49,12 @@ public class Lections implements Serializable {
         user = userSession.getCurrentUser();
         lections = lectionManager.getLectionsByLanguageForUser(user);
         languagesForUser = lections.keySet().stream().collect(Collectors.toList());
+
+        lections.values().stream().forEach((ls) -> {
+            ls.stream().forEach((l) -> {
+                numberOfWordsPerLection.put(l, lectionManager.countWordsForLection(l));
+            });
+        });
     }
 
     public List<Language> getLanguagesForUser() {
@@ -82,6 +88,10 @@ public class Lections implements Serializable {
                 new FacesMessage(FacesMessage.SEVERITY_INFO,
                         String.format("Lektion '%s' wurde angelegt.", newLectionName),
                         String.format("Die Lektion '%s' wurde erfolgreich angelegt.", newLectionName)));
+    }
+
+    public long getNumberOfWordsInLection(final Lection lection) {
+        return numberOfWordsPerLection.get(lection);
     }
 
     public String getNewLectionName() {
