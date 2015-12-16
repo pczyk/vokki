@@ -42,7 +42,7 @@ public class Word extends JPAEntity {
     @Column(nullable = false)
     private String foreignTerm;
 
-    @Column(nullable = false)
+    @Column
     private String comment;
 
     @Column(nullable = false)

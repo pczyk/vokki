@@ -3,8 +3,11 @@ package de.mupitu.vokki.business;
 import de.mupitu.vokki.business.users.entity.User;
 import de.mupitu.vokki.business.words.entity.Language;
 import de.mupitu.vokki.business.words.entity.Lection;
+import de.mupitu.vokki.business.words.entity.Word;
 import de.unidue.s3.bcrypt.BCrypt;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -25,6 +28,8 @@ public class DatabasePopulator {
     private User userMartin;
     private User userJohn;
     
+    private Lection lectionOne;
+    
     private Language languageGerman;
     private Language languageEnglish;
     private Language languageItalian;
@@ -35,9 +40,11 @@ public class DatabasePopulator {
         createLanguages();
         userMartin = createUser("martin", "martin", "info@example.com", languageGerman);
         userJohn = createUser("john", "john", "john.doe@example.com", languageEnglish);
-        createLection("Lection I", "My first lection", languageEnglish, languageGerman, userMartin);
+        lectionOne = createLection("Lection I", "My first lection", languageEnglish, languageGerman, userMartin);
         createLection("Lezione Uno", "Buon giorno!", languageItalian, languageGerman, userMartin);
         createLection("Lektion Eins", "Meine erste Lektion", languageGerman, languageEnglish, userJohn);
+        createWord(lectionOne, "hello", null, "hallo");
+        createWord(lectionOne, "play", "Theater", "Schauspiel", "Aufführung");
     }
     
     private void createLanguages() {
@@ -93,6 +100,26 @@ public class DatabasePopulator {
         logger.info("Lection created: " + lection.toString());
         
         return lection;
+    }
+    
+    private Word createWord(final Lection lection, final String foreignTerm, final String comment, final String... nativeTerms) {
+        final Word word = new Word();
+        
+        final Set<String> terms = new HashSet<>();
+        for(final String nativeTerm : nativeTerms) {
+            terms.add(nativeTerm);
+        }
+        
+        word.setLection(lection);
+        word.setComment(comment);
+        word.setNativeTerms(terms);
+        word.setForeignTerm(foreignTerm);
+        
+        em.persist(word);
+        
+        logger.info("Word created: " + word.toString());
+        
+        return word;
     }
     
 }

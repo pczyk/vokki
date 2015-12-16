@@ -17,27 +17,27 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class EditLection implements Serializable {
-    
+
     @EJB
     LectionManager lectionManager;
-    
+
     @EJB
     WordManager wordManager;
-    
+
     @ManagedProperty(value = "#{userSession}")
     private UserSession userSession;
-    
+
     private long lectionId;
-    
+
     private Lection lection;
-    
+
     private List<Word> words;
-    
+
     private List<Word> wordsToRemove = new LinkedList<>();
-    
+
     public String loadLection() {
         lection = lectionManager.findById(lectionId);
-        
+
         if (lection == null || !userSession.getCurrentUser().equals(lection.getOwner())) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -46,7 +46,7 @@ public class EditLection implements Serializable {
         } else {
             words = wordManager.getWordsForLection(lection);
         }
-        
+
         return null;
     }
 
@@ -54,31 +54,56 @@ public class EditLection implements Serializable {
     public long getLectionId() {
         return lectionId;
     }
-    
+
     public void setLectionId(long lectionId) {
         this.lectionId = lectionId;
     }
-    
+
     public Lection getLection() {
         return lection;
     }
-    
+
     public UserSession getUserSession() {
         return userSession;
     }
-    
+
     public void setUserSession(UserSession userSession) {
         this.userSession = userSession;
     }
- 
+
+    public String getLectionLanguage() {
+        return lection.getLanguage().getName();
+    }
+
+    public String getLectionBaseLanguage() {
+        return lection.getBaseLanguage().getName();
+    }
+
+    public String formatNativeTerms(final Word word) {
+        final StringBuilder builder = new StringBuilder();
+        boolean first = true;
+        
+        for(final String term : word.getNativeTerms()) {
+            if(first) {
+                first = false;
+            } else {
+                builder.append(", ");
+            }
+            
+            builder.append(term);
+        }
+        
+        return builder.toString();
+    }
+
     public List<Word> getWords() {
         return words;
     }
-    
+
     public void saveWords() {
         wordsToRemove.forEach(w -> wordManager.remove(w.getId()));
     }
-    
+
     public void removeWord(final Word word) {
         wordsToRemove.add(word);
     }

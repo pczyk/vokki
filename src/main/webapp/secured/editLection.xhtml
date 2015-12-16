@@ -16,13 +16,27 @@
         <h1>Lektion <h:outputText value="#{editLection.lection.name}" /></h1>
 
         <p:messages showDetail="true" />
-        
+
         <h:outputText value="#{editLection.lection.language.name}" rendered="#{editLection.lection ne null}" />
-        
-        <p:dataTable value="#{editLection.words}">
-                        
+
+        <p:dataTable value="#{editLection.words}" var="word">
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="#{editLection.lectionLanguage}" />
+                </f:facet>
+
+                <h:outputText value="#{word.foreignTerm}" />
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="#{editLection.lectionBaseLanguage}" />
+                </f:facet>
+
+                <h:outputText value="#{editLection.formatNativeTerms(word)}" />
+            </p:column>
         </p:dataTable>
-        
+
         <p:link outcome="lections" value="Zu Lektionen zurückkehren" />
     </h:body>
 </html>
