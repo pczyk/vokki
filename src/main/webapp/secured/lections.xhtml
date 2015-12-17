@@ -79,9 +79,12 @@
                             Aktion
                         </f:facet>
 
-                        <p:button icon="fa fa-edit" outcome="editLection">
+                        <p:button icon="fa fa-view" outcome="viewLection">
                             <f:param name="id" value="#{lection.id}" />                            
                         </p:button>
+                        <p:button icon="fa fa-edit" outcome="editLection">
+                            <f:param name="id" value="#{lection.id}" />                            
+                        </p:button>                        
                     </p:column>                    
                 </p:dataTable>
             </p:panel>
