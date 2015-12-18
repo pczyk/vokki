@@ -7,14 +7,19 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>vokki.org</title>
-        <h:outputStylesheet name="css/login.css" />
     </h:head>
     <h:body>
+        <f:facet name="last">
+            <h:outputStylesheet name="css/vokki.css" />
+            <h:outputStylesheet name="css/login.css" />
+            <h:outputStylesheet name="css/primefaces.css" />
+        </f:facet>
+        
         <div id="loginBox">
             <div id="box">
                 <h:form>
-                    <p:inputText placeholder="Login" value="#{userSession.username}" /><br />
-                    <p:password placeholder="Password" value="#{userSession.password}" /><br />
+                    <p:inputText placeholder="Benutzername" value="#{userSession.username}" /><br />
+                    <p:password placeholder="Passwort" value="#{userSession.password}" /><br />
                     <p:commandButton value="Anmelden" action="#{userSession.login()}" /><br />
                     <p:link outcome="register" value="Registrieren" />
                 </h:form>

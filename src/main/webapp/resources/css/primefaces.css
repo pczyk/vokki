@@ -1,0 +1,6 @@
+/* Style override for PrimeFaces classes */
+
+.ui-link {
+    color: #232323;
+    text-decoration: none;
+}

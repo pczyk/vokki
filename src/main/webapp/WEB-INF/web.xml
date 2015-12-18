@@ -26,6 +26,10 @@
             15
         </session-timeout>
     </session-config>
+    <mime-mapping>  
+        <extension>woff2</extension>  
+        <mime-type>application/x-font-woff2</mime-type>  
+    </mime-mapping>    
     <!-- LoginFilter -->
     <filter>
         <filter-name>LoginFilter</filter-name>
