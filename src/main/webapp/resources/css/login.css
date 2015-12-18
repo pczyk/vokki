@@ -1,0 +1,24 @@
+body {
+    background-color: #232323;
+    margin-top: 0px;
+}
+
+#loginBox {
+    margin: 0 auto;
+    max-width: 20em;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+}
+
+#box {
+    background-color: #ffffff;
+    min-height:15em;
+    padding: 1em;
+}
+
+#shadow {
+    background-color: #454545;
+    min-height:3em;
+    padding: 1em;
+}
