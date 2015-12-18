@@ -27,7 +27,7 @@ a {
 }
 
 #leftPanel {
-	padding-top: 150px;
+	padding-top: 125px;
 	width: 200px;
 	background-color: #232323;
 	float: left;
@@ -42,13 +42,19 @@ a {
 }
 
 #contentPanel {
-	margin-top: 30px;
+	margin-top: 40px;
 	margin-left: 230px;
 	background-color: #FFFFFF;
 	height: 100%;
 	font-family: 'Merriweather', serif;
+	color: #111111;
+}
+
+h1 {
+	font-weight: lighter;
 	font-size: 200%;
-	color: #AAA;
+	margin-bottom: 55px;
+	color: #AAAAAA;
 }
 
 /* -------- CSS Menu */
