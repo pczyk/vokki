@@ -9,9 +9,8 @@
     </h:head>
     <h:body>
         <ui:composition template="templates/template.xhtml">
-            <ui:define name="content">
-                <h1>Dashboard</h1>
-                
+            <ui:define name="pageTitle">Dashboard</ui:define>
+            <ui:define name="content">              
                 <p>Hallo, <h:outputText value="#{userSession.currentUser.username}" />!</p>
 
                 <p><p:link outcome="lections" value="Lektionen" /></p>
