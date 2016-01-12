@@ -4,58 +4,47 @@
 html {
     min-height: 100%;
     position: relative;
+    width: 100%;
+    height: 100%;
 }
 body {
-	margin: 0;
+    margin: 0;
     height:100%;
+    width: 100%;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .clearfix {
     overflow: auto;
 }
 
-#page {
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    overflow:hidden;
-}
-
 #leftPanel {
-	padding-top: 125px;
-	width: 200px;
-	background-color: #232323;
-	float: left;
-	height: 100%;
-}
-
-#horizontalSpacer {
-	float:left;
-	height: 100%;
-	width: 5px;
-	background-color: #DDDDDD;
+    padding-top: 125px;
+    width: 200px;
+    background-color: #232323;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border-right: 5px solid #DDDDDD;
 }
 
 #contentPanel {
-	margin-top: 40px;
-	margin-left: 230px;
-	background-color: #FFFFFF;
-	height: 100%;
-	font-family: 'Merriweather', serif;
-	color: #111111;
+    margin-top: 40px;
+    margin-left: 225px;
+    background-color: #FFFFFF;
+    height: 100%;
+    font-family: 'Merriweather', serif;
+    color: #111111;
 }
 
 h1 {
-	font-weight: lighter;
-	font-size: 200%;
-	margin-bottom: 55px;
-	color: #AAAAAA;
+    font-weight: lighter;
+    font-size: 200%;
+    margin-bottom: 55px;
+    color: #AAAAAA;
 }
 
 /* -------- CSS Menu */
@@ -64,235 +53,235 @@ h1 {
 /* Please Keep this font import at the very top of any CSS file */
 /* Starter CSS for Flyout Menu */
 #cssmenu {
-  padding: 0;
-  margin: 0;
-  border: 0;
-  line-height: 1;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    line-height: 1;
 }
 
 #cssmenu ul,
 #cssmenu ul li,
 #cssmenu ul ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 #cssmenu ul {
-  position: relative;
-  z-index: 597;
-  float: left;
+    position: relative;
+    z-index: 597;
+    float: left;
 }
 
 #cssmenu ul li {
-  float: left;
-  min-height: 1px;
-  line-height: 1em;
-  vertical-align: middle;
-  position: relative;
+    float: left;
+    min-height: 1px;
+    line-height: 1em;
+    vertical-align: middle;
+    position: relative;
 }
 
 #cssmenu ul li.hover,
 #cssmenu ul li:hover {
-  position: relative;
-  z-index: 599;
-  cursor: default;
+    position: relative;
+    z-index: 599;
+    cursor: default;
 }
 
 #cssmenu ul ul {
-  visibility: hidden;
-  position: absolute;
-  top: 100%;
-  left: 0px;
-  z-index: 598;
-  width: 100%;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    z-index: 598;
+    width: 100%;
 }
 
 #cssmenu ul ul li {
-  float: none;
+    float: none;
 }
 
 #cssmenu ul ul ul {
-  top: -2px;
-  right: 0;
+    top: -2px;
+    right: 0;
 }
 
 #cssmenu ul li:hover > ul {
-  visibility: visible;
+    visibility: visible;
 }
 
 #cssmenu ul ul {
-  top: 1px;
-  left: 99%;
+    top: 1px;
+    left: 99%;
 }
 
 #cssmenu ul li {
-  float: none;
+    float: none;
 }
 
 #cssmenu ul ul {
-  margin-top: 1px;
+    margin-top: 1px;
 }
 
 #cssmenu ul ul li {
-  font-weight: normal;
+    font-weight: normal;
 }
 
 /* Custom CSS Styles */
 #cssmenu {
-  width: 200px;
-  background: #232323;
-  font-family: 'Oxygen Mono', Tahoma, Arial, sans-serif;
-  zoom: 1;
-  font-size: 12px;
+    width: 200px;
+    background: #232323;
+    font-family: 'Oxygen Mono', Tahoma, Arial, sans-serif;
+    zoom: 1;
+    font-size: 12px;
 }
 
 #cssmenu:before {
-  content: '';
-  display: block;
+    content: '';
+    display: block;
 }
 
 #cssmenu:after {
-  content: '';
-  display: table;
-  clear: both;
+    content: '';
+    display: table;
+    clear: both;
 }
 
 #cssmenu a {
-  display: block;
-  padding: 15px 20px;
-  color: #ffffff;
-  text-decoration: none;
-  text-transform: uppercase;
+    display: block;
+    padding: 15px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 #cssmenu > ul {
-  width: 200px;
+    width: 200px;
 }
 
 #cssmenu ul ul {
-  width: 200px;
+    width: 200px;
 }
 
 #cssmenu > ul > li > a {
-  /*border-right: 4px solid #1b9bff; */
-  color: #ffffff;
+    /*border-right: 4px solid #1b9bff; */
+    color: #ffffff;
 }
 
 #cssmenu > ul > li > a:hover {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 #cssmenu > ul > li.active a {
-  background: #444444;
+    background: #444444;
 }
 
 #cssmenu > ul > li a:hover,
 #cssmenu > ul > li:hover a {
-  background: #444444;
+    background: #444444;
 }
 
 #cssmenu li {
-  position: relative;
+    position: relative;
 }
 
 #cssmenu ul li.has-sub > a:after {
-  content: '+';
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  margin-top: -6px;
+    content: '+';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    margin-top: -6px;
 }
 
 #cssmenu ul ul li.first {
-  -webkit-border-radius: 0 3px 0 0;
-  -moz-border-radius: 0 3px 0 0;
-  border-radius: 0 3px 0 0;
+    -webkit-border-radius: 0 3px 0 0;
+    -moz-border-radius: 0 3px 0 0;
+    border-radius: 0 3px 0 0;
 }
 
 #cssmenu ul ul li.last {
-  -webkit-border-radius: 0 0 3px 0;
-  -moz-border-radius: 0 0 3px 0;
-  border-radius: 0 0 3px 0;
-  border-bottom: 0;
+    -webkit-border-radius: 0 0 3px 0;
+    -moz-border-radius: 0 0 3px 0;
+    border-radius: 0 0 3px 0;
+    border-bottom: 0;
 }
 
 #cssmenu ul ul {
-  -webkit-border-radius: 0 3px 3px 0;
-  -moz-border-radius: 0 3px 3px 0;
-  border-radius: 0 3px 3px 0;
+    -webkit-border-radius: 0 3px 3px 0;
+    -moz-border-radius: 0 3px 3px 0;
+    border-radius: 0 3px 3px 0;
 }
 
 #cssmenu ul ul {
-  border: 1px solid #111111;
+    border: 1px solid #111111;
 }
 
 #cssmenu ul ul a {
-  font-size: 12px;
-  color: #ffffff;
+    font-size: 12px;
+    color: #ffffff;
 }
 
 #cssmenu ul ul a:hover {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 #cssmenu ul ul li {
-  border-bottom: 1px solid #111111;
+    border-bottom: 1px solid #111111;
 }
 
 #cssmenu ul ul li:hover > a {
-  background: #555555;
-  color: #ffffff;
+    background: #555555;
+    color: #ffffff;
 }
 
 #cssmenu.align-right > ul > li > a {
-  border-left: 4px solid #444444;
-  border-right: none;
+    border-left: 4px solid #444444;
+    border-right: none;
 }
 
 #cssmenu.align-right {
-  float: right;
+    float: right;
 }
 
 #cssmenu.align-right li {
-  text-align: right;
+    text-align: right;
 }
 
 #cssmenu.align-right ul li.has-sub > a:before {
-  content: '+';
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  margin-top: -6px;
+    content: '+';
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    margin-top: -6px;
 }
 
 #cssmenu.align-right ul li.has-sub > a:after {
-  content: none;
+    content: none;
 }
 
 #cssmenu.align-right ul ul {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: -100%;
-  z-index: 598;
-  width: 100%;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: -100%;
+    z-index: 598;
+    width: 100%;
 }
 
 #cssmenu.align-right ul ul li.first {
-  -webkit-border-radius: 3px 0 0 0;
-  -moz-border-radius: 3px 0 0 0;
-  border-radius: 3px 0 0 0;
+    -webkit-border-radius: 3px 0 0 0;
+    -moz-border-radius: 3px 0 0 0;
+    border-radius: 3px 0 0 0;
 }
 
 #cssmenu.align-right ul ul li.last {
-  -webkit-border-radius: 0 0 0 3px;
-  -moz-border-radius: 0 0 0 3px;
-  border-radius: 0 0 0 3px;
+    -webkit-border-radius: 0 0 0 3px;
+    -moz-border-radius: 0 0 0 3px;
+    border-radius: 0 0 0 3px;
 }
 
 #cssmenu.align-right ul ul {
-  -webkit-border-radius: 3px 0 0 3px;
-  -moz-border-radius: 3px 0 0 3px;
-  border-radius: 3px 0 0 3px;
+    -webkit-border-radius: 3px 0 0 3px;
+    -moz-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
 }

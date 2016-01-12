@@ -9,86 +9,89 @@
         <title>vokki.org</title>
     </h:head>
     <h:body>
-        <h1>Lektionen</h1>
+        <ui:composition template="templates/template.xhtml">
+            <ui:define name="pageTitle">Lektionen</ui:define>
+            <ui:define name="content">              
+                <p:growl id="messages" />
 
-        <p:growl id="messages" />
+                <h:form>
+                    <p:commandLink value="Neue Lektion erstellen" onclick="PF('dialog').show()" />
+                </h:form>
 
-        <h:form>
-            <p:commandLink value="Neue Lektion erstellen" onclick="PF('dialog').show()" />
-        </h:form>
-
-        <h:form>
-            <p:dialog showEffect="fade" hideEffect="explode" widgetVar="dialog" modal="true" header="Neue Lektion erstellen">
-                <p:inputText placeholder="Lektionsname" value="#{lections.newLectionName}" /><br />
-                <p:inputTextarea placeholder="Beschreibung" value="#{lections.newLectionDescription}" /><br />
-                <p:selectOneMenu value="#{lections.newLectionLanguage}" converter="omnifaces.SelectItemsConverter">
-                    <f:selectItem itemLabel="Sprache" noSelectionOption="true" />
-                    <f:selectItems value="#{lections.languages}" var="lang" itemLabel="#{lang.name}" />
-                </p:selectOneMenu><br />
-                <f:facet name="footer">
-                    <p:commandButton value="Lektion anlegen" update="@all" actionListener="#{lections.createLection()}"
-                                     oncomplete="handleNewLectionRequest(xhr, status, args)" />
-                </f:facet> 
-            </p:dialog>
-        </h:form>
+                <h:form>
+                    <p:dialog showEffect="fade" hideEffect="explode" widgetVar="dialog" modal="true" header="Neue Lektion erstellen">
+                        <p:inputText placeholder="Lektionsname" value="#{lections.newLectionName}" /><br />
+                        <p:inputTextarea placeholder="Beschreibung" value="#{lections.newLectionDescription}" /><br />
+                        <p:selectOneMenu value="#{lections.newLectionLanguage}" converter="omnifaces.SelectItemsConverter">
+                            <f:selectItem itemLabel="Sprache" noSelectionOption="true" />
+                            <f:selectItems value="#{lections.languages}" var="lang" itemLabel="#{lang.name}" />
+                        </p:selectOneMenu><br />
+                        <f:facet name="footer">
+                            <p:commandButton value="Lektion anlegen" update="@all" actionListener="#{lections.createLection()}"
+                                             oncomplete="handleNewLectionRequest(xhr, status, args)" />
+                        </f:facet> 
+                    </p:dialog>
+                </h:form>
 
 
-        <script type="text/javascript">
-            function handleNewLectionRequest(xhr, status, args) {
-                if (args.validationFailed || !args.loggedIn) {
-                    PF('dialog').jq.effect("shake", {times: 5}, 100);
-                } else {
-                    PF('dialog').hide();
-                }
-            }
-        </script>
+                <script type="text/javascript">
+                    function handleNewLectionRequest(xhr, status, args) {
+                        if (args.validationFailed || !args.loggedIn) {
+                            PF('dialog').jq.effect("shake", {times: 5}, 100);
+                        } else {
+                            PF('dialog').hide();
+                        }
+                    }
+                </script>
 
-        <ui:repeat value="#{lections.languagesForUser}" var="language">
-            <p:panel>
-                <f:facet name="header">
-                    <h:outputText value="#{language.name}" />    
-                </f:facet>
-
-                <p:dataTable  value="#{lections.getLectionsByLanguage(language)}" var="lection">
-                    <p:column>
+                <ui:repeat value="#{lections.languagesForUser}" var="language">
+                    <p:panel>
                         <f:facet name="header">
-                            Lektion
+                            <h:outputText value="#{language.name}" />    
                         </f:facet>
 
-                        <h:outputText value="#{lection.name}" />
-                    </p:column>
+                        <p:dataTable  value="#{lections.getLectionsByLanguage(language)}" var="lection">
+                            <p:column>
+                                <f:facet name="header">
+                                    Lektion
+                                </f:facet>
 
-                    <p:column>
-                        <f:facet name="header">
-                            Beschreibung
-                        </f:facet>
+                                <h:outputText value="#{lection.name}" />
+                            </p:column>
 
-                        <h:outputText value="#{lection.description}" />
-                    </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    Beschreibung
+                                </f:facet>
 
-                    <p:column>
-                        <f:facet name="header">
-                            Wörter
-                        </f:facet>
+                                <h:outputText value="#{lection.description}" />
+                            </p:column>
 
-                        <h:outputText value="#{lections.getNumberOfWordsInLection(lection)}" />
-                    </p:column>        
+                            <p:column>
+                                <f:facet name="header">
+                                    Wörter
+                                </f:facet>
 
-                    <p:column>
-                        <f:facet name="header">
-                            Aktion
-                        </f:facet>
+                                <h:outputText value="#{lections.getNumberOfWordsInLection(lection)}" />
+                            </p:column>        
 
-                        <p:button icon="fa fa-view" outcome="viewLection">
-                            <f:param name="id" value="#{lection.id}" />                            
-                        </p:button>
-                        <p:button icon="fa fa-edit" outcome="editLection">
-                            <f:param name="id" value="#{lection.id}" />                            
-                        </p:button>                        
-                    </p:column>                    
-                </p:dataTable>
-            </p:panel>
-        </ui:repeat>
+                            <p:column>
+                                <f:facet name="header">
+                                    Aktion
+                                </f:facet>
+
+                                <p:button icon="fa fa-view" outcome="viewLection">
+                                    <f:param name="id" value="#{lection.id}" />                            
+                                </p:button>
+                                <p:button icon="fa fa-edit" outcome="editLection">
+                                    <f:param name="id" value="#{lection.id}" />                            
+                                </p:button>                        
+                            </p:column>                    
+                        </p:dataTable>
+                    </p:panel>
+                </ui:repeat>
+            </ui:define>
+        </ui:composition>           
     </h:body>
 </html>
 
