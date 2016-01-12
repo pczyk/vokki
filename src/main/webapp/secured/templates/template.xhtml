@@ -9,22 +9,24 @@
         <h:outputStylesheet name="css/template.css" />
         <div id="page">
             <div id="leftPanel">
-                <nav id="cssmenu">
-                    <ul>
-                        <li class="active"><h:link outcome="dashboard" value="Dashboard" /></li>
-                        <li><a href="#">Lernen</a></li>
-                        <li class="has-sub"><a href="#">Erstellen</a>
-                            <ul>
-                                <li><h:link outcome="lections" value="Lektionen" /></li>
-                                <li class="last"><a href="#">Babbeldibumm</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Statistiken</a></li>
-                        <li><a href="#">Marktplatz</a></li>
-                        <li><a href="#">Einstellungen</a></li>
-                        <li class="last"><a href="#">Abmelden</a></li>
-                    </ul>
-                </nav>
+                <h:form>
+                    <nav id="cssmenu">
+                        <ul>
+                            <li class="active"><h:link outcome="dashboard" value="Dashboard" /></li>
+                            <li><a href="#">Lernen</a></li>
+                            <li class="has-sub"><a href="#">Erstellen</a>
+                                <ul>
+                                    <li><h:link outcome="lections" value="Lektionen" /></li>
+                                    <li class="last"><a href="#">Babbeldibumm</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Statistiken</a></li>
+                            <li><a href="#">Marktplatz</a></li>
+                            <li><a href="#">Einstellungen</a></li>
+                            <li class="last"><h:commandLink action="#{userSession.logout()}" value="Abmelden" /></li>
+                        </ul>
+                    </nav>
+                </h:form>
             </div>
             <div id="contentPanel">
                 <h1><ui:insert name="pageTitle" /></h1>
