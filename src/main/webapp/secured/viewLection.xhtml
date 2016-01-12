@@ -13,34 +13,38 @@
         <f:viewAction action="#{viewLection.loadLection}"/>
     </f:metadata>    
     <h:body>
-        <h1>View Lektion <h:outputText value="#{viewLection.lection.name}" /></h1>
+        <ui:composition template="templates/template.xhtml">
+            <ui:define name="pageTitle">Lektion '<h:outputText value="#{viewLection.lection.name}" />'</ui:define>
+            <ui:define name="content">              
+                <p:messages showDetail="true" />
 
-        <p:messages showDetail="true" />
+                <h:outputText value="#{viewLection.lection.language.name}" rendered="#{viewLection.lection ne null}" />
 
-        <h:outputText value="#{viewLection.lection.language.name}" rendered="#{viewLection.lection ne null}" />
+                <p:dataTable value="#{viewLection.words}" var="word">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{viewLection.lectionLanguage}" />
+                        </f:facet>
 
-        <p:dataTable value="#{viewLection.words}" var="word">
-            <p:column>
-                <f:facet name="header">
-                    <h:outputText value="#{viewLection.lectionLanguage}" />
-                </f:facet>
+                        <h:outputText value="#{word.foreignTerm}" />
+                    </p:column>
 
-                <h:outputText value="#{word.foreignTerm}" />
-            </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{viewLection.lectionBaseLanguage}" />
+                        </f:facet>
 
-            <p:column>
-                <f:facet name="header">
-                    <h:outputText value="#{viewLection.lectionBaseLanguage}" />
-                </f:facet>
+                        <h:outputText value="#{viewLection.formatNativeTerms(word)}" />
+                    </p:column>
+                </p:dataTable>
 
-                <h:outputText value="#{viewLection.formatNativeTerms(word)}" />
-            </p:column>
-        </p:dataTable>
-
-        <p:link outcome="editLection" value="Lektion bearbeiten">
-            <f:param name="id" value="#{viewLection.lectionId}" />
-        </p:link>
-        <p:link outcome="lections" value="Zu Lektionen zurückkehren" />
+                <p:link outcome="editLection" value="Lektion bearbeiten">
+                    <f:param name="id" value="#{viewLection.lectionId}" />
+                </p:link>
+                <br />
+                <p:link outcome="lections" value="Zu Lektionen zurückkehren" />
+            </ui:define>
+        </ui:composition>           
     </h:body>
 </html>
 
