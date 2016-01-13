@@ -8,8 +8,10 @@ import de.mupitu.vokki.business.words.boundary.WordManager;
 import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.business.words.entity.Word;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
@@ -34,6 +36,10 @@ public class EditLection implements Serializable {
     private List<Word> words;
 
     private List<Word> wordsToRemove = new LinkedList<>();
+    
+    private String newWordForeignTerm;
+    private String newWordNativeTerms;
+    private String newWordComment;
 
     public String loadLection() {
         lection = lectionManager.findById(lectionId);
@@ -48,6 +54,25 @@ public class EditLection implements Serializable {
         }
 
         return null;
+    }
+    
+    public void saveWord() { 
+        final Set<String> nativeTerms = new HashSet<>();
+        
+        for(final String term : newWordNativeTerms.split("\n")) {
+            nativeTerms.add(term.trim());
+        }
+        
+        
+        final Word newWord = Word.createWord(newWordForeignTerm, nativeTerms, lection, newWordComment);
+        
+        wordManager.save(newWord);
+        
+        newWordForeignTerm = null;
+        newWordNativeTerms = null;
+        newWordComment = null;
+        
+        words = wordManager.getWordsForLection(lection);
     }
 
     // --- getters and setters ---
@@ -107,4 +132,30 @@ public class EditLection implements Serializable {
     public void removeWord(final Word word) {
         wordsToRemove.add(word);
     }
+
+    public String getNewWordNativeTerms() {
+        return newWordNativeTerms;
+    }
+
+    public void setNewWordNativeTerms(String newWordNativeTerms) {
+        this.newWordNativeTerms = newWordNativeTerms;
+    }
+
+    public String getNewWordForeignTerm() {
+        return newWordForeignTerm;
+    }
+
+    public void setNewWordForeignTerm(String newWordForeignTerm) {
+        this.newWordForeignTerm = newWordForeignTerm;
+    }
+
+    public String getNewWordComment() {
+        return newWordComment;
+    }
+
+    public void setNewWordComment(String newWordComment) {
+        this.newWordComment = newWordComment;
+    }
+    
+    
 }

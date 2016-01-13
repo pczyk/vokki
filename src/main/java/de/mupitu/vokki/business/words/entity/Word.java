@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import static de.mupitu.vokki.business.words.entity.Word.findAll;
+import java.time.LocalDateTime;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -51,10 +52,10 @@ public class Word extends JPAEntity {
     private int wordLevel;
 
     @Column
-    private LocalDate lastPracticed;
+    private LocalDateTime lastPracticed;
     
     @Column
-    private LocalDate lastRelegation;
+    private LocalDateTime lastRelegation;
 
     @ManyToOne(optional = false)
     private Lection lection;
@@ -110,11 +111,11 @@ public class Word extends JPAEntity {
         this.wordLevel = wordLevel;
     }
 
-    public LocalDate getLastPracticed() {
+    public LocalDateTime getLastPracticed() {
         return lastPracticed;
     }
 
-    public void setLastPracticed(LocalDate lastPracticed) {
+    public void setLastPracticed(LocalDateTime lastPracticed) {
         this.lastPracticed = lastPracticed;
     }
 
@@ -150,11 +151,11 @@ public class Word extends JPAEntity {
         this.numberOfCorrectAnswers = numberOfCorrectAnswers;
     }
 
-    public LocalDate getLastRelegation() {
+    public LocalDateTime getLastRelegation() {
         return lastRelegation;
     }
 
-    public void setLastRelegation(LocalDate lastRelegation) {
+    public void setLastRelegation(LocalDateTime lastRelegation) {
         this.lastRelegation = lastRelegation;
     }
     
