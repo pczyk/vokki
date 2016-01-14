@@ -43,6 +43,7 @@ public class DatabasePopulator {
         lectionOne = createLection("Lection I", "My first lection", languageEnglish, languageGerman, userMartin);
         createLection("Lezione Uno", "Buon giorno!", languageItalian, languageGerman, userMartin);
         createLection("Lektion Eins", "Meine erste Lektion", languageGerman, languageEnglish, userJohn);
+        createLection("Lekcja Pierwsza", "Erste polnische Lektion", languagePolish, languageGerman, userMartin);
         createWord(lectionOne, "hello", null, "hallo");
         createWord(lectionOne, "play", "Theater", "Schauspiel", "Aufführung");
     }
@@ -50,8 +51,8 @@ public class DatabasePopulator {
     private void createLanguages() {
         languageGerman = createLanguage("Deutsch", "de.png");
         languageEnglish = createLanguage("Englisch", "en.png");
-        languageItalian = createLanguage("Italienisch", "de.png");
-        languagePolish = createLanguage("Polnisch", "de.png");
+        languageItalian = createLanguage("Italienisch", "it.png");
+        languagePolish = createLanguage("Polnisch", "pl.png");
     }
     
     private Language createLanguage(final String name, final String flagPath) {

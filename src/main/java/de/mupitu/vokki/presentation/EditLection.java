@@ -7,6 +7,7 @@ import de.mupitu.vokki.business.words.boundary.LectionManager;
 import de.mupitu.vokki.business.words.boundary.WordManager;
 import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.business.words.entity.Word;
+import de.mupitu.vokki.presentation.utils.PrimeFacesKeyboardUtils;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -37,6 +38,8 @@ public class EditLection implements Serializable {
 
     private List<Word> wordsToRemove = new LinkedList<>();
 
+    private String keyboardLayout;
+
     private String newWordForeignTerm;
     private String newWordNativeTerms;
     private String newWordComment;
@@ -52,6 +55,8 @@ public class EditLection implements Serializable {
         } else {
             words = wordManager.getWordsForLection(lection);
         }
+
+        keyboardLayout = PrimeFacesKeyboardUtils.getLayoutTemplateForLanguage(lection.getLanguage());
 
         return null;
     }
@@ -84,13 +89,13 @@ public class EditLection implements Serializable {
                             "Das Wort konnte nicht gelöscht werden"));
         } else {
             wordManager.remove(id);
-            
+
             ctx.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Wort gelöscht",
                             "Das Wort wurde gelöscht"));
         }
-        
+
         words.removeIf(word -> word.getId() == id);
     }
 
@@ -174,6 +179,10 @@ public class EditLection implements Serializable {
 
     public void setNewWordComment(String newWordComment) {
         this.newWordComment = newWordComment;
+    }
+
+    public String getKeyboardLayout() {
+        return keyboardLayout;
     }
 
 }

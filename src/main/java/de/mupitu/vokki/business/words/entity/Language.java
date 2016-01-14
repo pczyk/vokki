@@ -62,7 +62,7 @@ public class Language extends JPAEntity {
     public void setFlagPath(String flagPath) {
         this.flagPath = flagPath;
     }
-
+    
     @Override
     public String toString() {
         return String.format("%s[id=%d]", getClass().getSimpleName(), getId());

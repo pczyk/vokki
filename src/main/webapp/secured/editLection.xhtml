@@ -43,14 +43,15 @@
                                 Aktionen
                             </f:facet>
 
-                            <p:commandButton icon="fa fa-delete" action="#{editLection.deleteWord(word.id)}" update="wordTable">
+                            <p:commandButton icon="fa fa-remove" action="#{editLection.deleteWord(word.id)}" update="wordTable">
                                 <p:confirm header="Wort löschen" message="Möchten Sie das Wort wirklich löschen?" icon="ui-icon-alert"/>
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
 
                     <p:panel header="Neues Wort anlegen" id="newWordPanel">
-                        <p:inputText value="#{editLection.newWordForeignTerm}" placeholder="Fremdwort" /><br />
+                        <p:inputText value="#{editLection.newWordForeignTerm}" placeholder="Fremdwort" rendered="#{editLection.keyboardLayout eq null}" />
+                        <p:keyboard value="#{editLection.newWordForeignTerm}" placeholder="Fremdwort" rendered="#{editLection.keyboardLayout ne null}" layout="custom" layoutTemplate="#{editLection.keyboardLayout}" /><br />
                         <p:inputTextarea value="#{editLection.newWordNativeTerms}" placeholder="Native Terms" /><br/>
                         <p:inputText value="#{editLection.newWordComment}" placeholder="Kommentar" /><br />
                         <p:commandButton action="#{editLection.saveWord()}" update="wordTable newWordPanel" value="Speichern" />
