@@ -36,7 +36,7 @@ public class EditLection implements Serializable {
     private List<Word> words;
 
     private List<Word> wordsToRemove = new LinkedList<>();
-    
+
     private String newWordForeignTerm;
     private String newWordNativeTerms;
     private String newWordComment;
@@ -55,24 +55,43 @@ public class EditLection implements Serializable {
 
         return null;
     }
-    
-    public void saveWord() { 
+
+    public void saveWord() {
         final Set<String> nativeTerms = new HashSet<>();
-        
-        for(final String term : newWordNativeTerms.split("\n")) {
+
+        for (final String term : newWordNativeTerms.split("\n")) {
             nativeTerms.add(term.trim());
         }
-        
-        
+
         final Word newWord = Word.createWord(newWordForeignTerm, nativeTerms, lection, newWordComment);
-        
+
         wordManager.save(newWord);
-        
+
         newWordForeignTerm = null;
         newWordNativeTerms = null;
         newWordComment = null;
-        
+
         words = wordManager.getWordsForLection(lection);
+    }
+
+    public void deleteWord(final int id) {
+        final FacesContext ctx = FacesContext.getCurrentInstance();
+
+        if (!words.stream().filter(w -> w.getId() == id).findAny().isPresent()) {
+            ctx.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Wort kann nicht gelöscht werden",
+                            "Das Wort konnte nicht gelöscht werden"));
+        } else {
+            wordManager.remove(id);
+            
+            ctx.addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Wort gelöscht",
+                            "Das Wort wurde gelöscht"));
+        }
+        
+        words.removeIf(word -> word.getId() == id);
     }
 
     // --- getters and setters ---
@@ -107,17 +126,17 @@ public class EditLection implements Serializable {
     public String formatNativeTerms(final Word word) {
         final StringBuilder builder = new StringBuilder();
         boolean first = true;
-        
-        for(final String term : word.getNativeTerms()) {
-            if(first) {
+
+        for (final String term : word.getNativeTerms()) {
+            if (first) {
                 first = false;
             } else {
                 builder.append(", ");
             }
-            
+
             builder.append(term);
         }
-        
+
         return builder.toString();
     }
 
@@ -156,6 +175,5 @@ public class EditLection implements Serializable {
     public void setNewWordComment(String newWordComment) {
         this.newWordComment = newWordComment;
     }
-    
-    
+
 }

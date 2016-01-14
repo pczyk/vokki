@@ -19,7 +19,7 @@
                 <p:messages showDetail="true" />
 
                 <h:outputText value="#{editLection.lection.language.name}" rendered="#{editLection.lection ne null}" />
-                
+
                 <h:form>
                     <p:dataTable id="wordTable" value="#{editLection.words}" var="word">
                         <p:column>
@@ -37,6 +37,16 @@
 
                             <h:outputText value="#{editLection.formatNativeTerms(word)}" />
                         </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                Aktionen
+                            </f:facet>
+
+                            <p:commandButton icon="fa fa-delete" action="#{editLection.deleteWord(word.id)}" update="wordTable">
+                                <p:confirm header="Wort löschen" message="Möchten Sie das Wort wirklich löschen?" icon="ui-icon-alert"/>
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
 
                     <p:panel header="Neues Wort anlegen" id="newWordPanel">
@@ -45,6 +55,13 @@
                         <p:inputText value="#{editLection.newWordComment}" placeholder="Kommentar" /><br />
                         <p:commandButton action="#{editLection.saveWord()}" update="wordTable newWordPanel" value="Speichern" />
                     </p:panel>
+
+                    <p:confirmDialog global="true">
+                        <p:commandButton value="Ja" type="button" styleClass="ui-confirmdialog-yes"
+                                         icon="ui-icon-check"/>
+                        <p:commandButton value="Nein" type="button" styleClass="ui-confirmdialog-no"
+                                         icon="ui-icon-close"/>
+                    </p:confirmDialog>
                 </h:form>
             </ui:define>
         </ui:composition>  
