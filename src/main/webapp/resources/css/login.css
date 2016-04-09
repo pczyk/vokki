@@ -16,7 +16,11 @@ body {
     min-height: 160px;
     padding: 1em;
     text-align: center;
-    padding-top: 80px; /* until the logo is done... */
+    padding-top: 30px; /* until the logo is done... */
+}
+
+#box img {
+    margin-bottom: 15px;
 }
 
 #shadow {
@@ -24,6 +28,7 @@ body {
     color: #888888;
     min-height:3em;
     padding: 1em;
+    text-align: center;
 }
 
 #box input {

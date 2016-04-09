@@ -55,15 +55,16 @@ public class UserSession implements Serializable {
 
         if (currentUser == null) {
             // Error. User not found or wrong credentials
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Unknown login, try again"));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Unknown login", "Try again!"));
 
             username = null;
             password = null;
             return "";
         } else {
             currentUser = userManager.updateLastLogin(currentUser);
-            
-            if(requestedPage != null) {
+
+            if (requestedPage != null) {
                 System.out.println("requested page = " + requestedPage);
                 return requestedPage;
             } else {

@@ -15,8 +15,11 @@
             <h:outputStylesheet name="css/primefaces.css" />
         </f:facet>
         
+        <p:growl autoUpdate="true" />
+        
         <div id="loginBox">
             <div id="box">
+                <h:graphicImage name="images/vokki-full.png" />
                 <h:form>
                     <p:inputText placeholder="Benutzername" value="#{userSession.username}" /><br />
                     <p:password placeholder="Passwort" value="#{userSession.password}" /><br />
@@ -25,7 +28,7 @@
                 </h:form>
             </div>
             <div id="shadow">
-                lorem
+                vokki
             </div>
         </div>
     </h:body>

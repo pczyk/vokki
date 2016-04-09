@@ -22,13 +22,18 @@ a {
 }
 
 #leftPanel {
-    padding-top: 125px;
+    padding-top: 45px;
     width: 200px;
     background-color: #232323;
     position: absolute;
     top: 0;
     height: 100%;
     border-right: 5px solid #DDDDDD;
+}
+
+#logo {
+    text-align: center;
+    margin-bottom: 13px;
 }
 
 #contentPanel {
