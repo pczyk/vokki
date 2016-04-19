@@ -12,6 +12,12 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Captures a language that is supported by vokki. Every lection (and therefore,
+ * every word) is assigned to a language. Languages are shared between users.
+ *
+ * @author Martin Filipczyk
+ */
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -19,10 +25,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Language extends JPAEntity {
 
     // ----- Named Queries -----
-    
     static final String PREFIX = "de.mupitu.vokki.business.words.entity.Language.";
     public static final String findAll = PREFIX + "findAll";
-    
+
     @Id
     @GeneratedValue
     private long id;
@@ -53,6 +58,7 @@ public class Language extends JPAEntity {
 
     /**
      * Gets the path to the image showing the language's associated flag
+     *
      * @return path to flag image path
      */
     public String getFlagPath() {
@@ -62,7 +68,7 @@ public class Language extends JPAEntity {
     public void setFlagPath(String flagPath) {
         this.flagPath = flagPath;
     }
-    
+
     @Override
     public String toString() {
         return String.format("%s[id=%d]", getClass().getSimpleName(), getId());

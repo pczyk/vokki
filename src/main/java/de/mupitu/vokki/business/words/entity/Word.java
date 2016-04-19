@@ -19,6 +19,13 @@ import static de.mupitu.vokki.business.words.entity.Word.findAll;
 import java.time.LocalDateTime;
 import javax.persistence.ManyToOne;
 
+/**
+ * Representation of a word in a foreign language including its translation(s)
+ * to the mother tongue (there may be more than one translation). Every word
+ * instance belongs to a lection and is unqiue for every user.
+ *
+ * @author Martin Filipczyk
+ */
 @Entity
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement
@@ -26,10 +33,9 @@ import javax.persistence.ManyToOne;
 public class Word extends JPAEntity {
 
     // ----- Named Queries -----
-    
     static final String PREFIX = "de.mupitu.vokki.business.words.entity.Word.";
     public static final String findAll = PREFIX + "findAll";
-    
+
     public static final int MIN_LEVEL = 0;
     public static final int MAX_LEVEL = 6;
 
@@ -53,24 +59,24 @@ public class Word extends JPAEntity {
 
     @Column
     private LocalDateTime lastPracticed;
-    
+
     @Column
     private LocalDateTime lastRelegation;
-    
+
     @Column
     private LocalDate nextExerciseDate;
 
     @ManyToOne(optional = false)
     private Lection lection;
-    
+
     @Column
     @Min(value = 0)
     private int numberOfTests = 0;
-    
+
     @Column
     @Min(value = 0)
     private int numberOfCorrectAnswers = 0;
-    
+
     // ------------
     @Override
     public Long getId() {
@@ -169,9 +175,8 @@ public class Word extends JPAEntity {
     public void setNextExerciseDate(LocalDate nextExerciseDate) {
         this.nextExerciseDate = nextExerciseDate;
     }
-    
+
     // --------------
-    
     public static Word createWord(final String foreignTerm,
             final Set<String> nativeTerms, final Lection lection, final String comment) {
         final Word word = new Word();

@@ -16,6 +16,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * A lection is a collection of words in a foreign language. To be able to cope
+ * with large amounts of words that a user may create, these words are organized
+ * in lections. Lections are unique to users but may be copied (including its
+ * words) from one to another user.
+ *
+ * @author Martin Filipczyk
+ */
 @Entity
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)

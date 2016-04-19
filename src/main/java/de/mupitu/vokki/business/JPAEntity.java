@@ -2,6 +2,11 @@ package de.mupitu.vokki.business;
 
 import java.io.Serializable;
 
+/**
+ * Base type for all entities within the system.
+ * 
+ * @author Martin Filipczyk
+ */
 public abstract class JPAEntity implements Serializable {
 
     public abstract Long getId();

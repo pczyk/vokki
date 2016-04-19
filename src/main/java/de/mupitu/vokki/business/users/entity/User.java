@@ -2,7 +2,8 @@ package de.mupitu.vokki.business.users.entity;
 
 import de.mupitu.vokki.business.JPAEntity;
 import static de.mupitu.vokki.business.users.entity.User.findAll;
-import de.mupitu.vokki.business.words.entity.Language;;
+import de.mupitu.vokki.business.words.entity.Language;
+;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,34 +15,39 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Human user that interacts with the vokki system.
+ *
+ * @author Martin Filipczyk
+ */
 @Entity
-@NamedQuery(name = findAll, query="SELECT u FROM User u")
+@NamedQuery(name = findAll, query = "SELECT u FROM User u")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User extends JPAEntity {
 
     private static final String PREFIX = "de.mupitu.vokki.business.users.entity.";
     public static final String findAll = PREFIX + "findAll";
-    
+
     @Id
     @GeneratedValue
     private long id;
-    
+
     @Column(nullable = false)
     private String username;
-    
+
     @Column(nullable = false)
     private String password;
-    
+
     @Column(nullable = false)
     private String emailAddress;
-    
+
     @Column(nullable = false)
     private LocalDate registerDate;
-    
+
     @Column
     private LocalDate lastLogin;
-    
+
     @ManyToOne(optional = false)
     private Language language;
 
@@ -102,5 +108,5 @@ public class User extends JPAEntity {
     public void setLanguage(Language language) {
         this.language = language;
     }
-    
+
 }
