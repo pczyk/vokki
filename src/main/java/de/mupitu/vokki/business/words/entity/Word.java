@@ -56,6 +56,9 @@ public class Word extends JPAEntity {
     
     @Column
     private LocalDateTime lastRelegation;
+    
+    @Column
+    private LocalDate nextExerciseDate;
 
     @ManyToOne(optional = false)
     private Lection lection;
@@ -157,6 +160,14 @@ public class Word extends JPAEntity {
 
     public void setLastRelegation(LocalDateTime lastRelegation) {
         this.lastRelegation = lastRelegation;
+    }
+
+    public LocalDate getNextExerciseDate() {
+        return nextExerciseDate;
+    }
+
+    public void setNextExerciseDate(LocalDate nextExerciseDate) {
+        this.nextExerciseDate = nextExerciseDate;
     }
     
     // --------------

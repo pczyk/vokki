@@ -1,5 +1,7 @@
 package de.mupitu.vokki.business.words.boundary;
 
+import de.mupitu.vokki.business.users.entity.User;
+import de.mupitu.vokki.business.words.entity.Language;
 import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.business.words.entity.Word;
 import java.time.LocalDate;
@@ -40,5 +42,13 @@ public class WordManager {
         } catch (final EntityNotFoundException e) {
             // nothing to do here
         }
+    }
+
+    public List<Word> getUrgentWordsForUser(final User user, final Language language) {
+        return em
+                .createQuery("SELECT w FROM Word w WHERE w.lection.language=:language AND w.lection.owner=:user", Word.class)
+                .setParameter("language", language)
+                .setParameter("user", user)
+                .getResultList();
     }
 }
