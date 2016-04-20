@@ -5,11 +5,12 @@ import de.mupitu.vokki.business.users.entity.User;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
+@Named
 @SessionScoped
 public class UserSession implements Serializable {
 
@@ -27,7 +28,7 @@ public class UserSession implements Serializable {
         this.requestedPage = requestedPage;
     }
 
-    @EJB
+    @Inject
     private UserManager userManager;
 
     public String getUsername() {

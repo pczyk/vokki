@@ -6,16 +6,16 @@ import de.mupitu.vokki.business.words.entity.Language;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class Register implements Serializable {
 
     // Injections
-    @EJB
+    @Inject
     LanguageManager languageManager;
     
     // For presentation

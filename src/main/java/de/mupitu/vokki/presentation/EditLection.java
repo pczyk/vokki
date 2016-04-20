@@ -1,8 +1,5 @@
 package de.mupitu.vokki.presentation;
 
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import de.mupitu.vokki.business.words.boundary.LectionManager;
 import de.mupitu.vokki.business.words.boundary.WordManager;
 import de.mupitu.vokki.business.words.entity.Lection;
@@ -14,20 +11,22 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class EditLection implements Serializable {
 
-    @EJB
+    @Inject
     LectionManager lectionManager;
 
-    @EJB
+    @Inject
     WordManager wordManager;
 
-    @ManagedProperty(value = "#{userSession}")
+    @Inject
     private UserSession userSession;
 
     private long lectionId;

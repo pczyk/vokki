@@ -12,12 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import de.mupitu.vokki.presentation.UserSession;
+import javax.inject.Inject;
 
 public class LoginFilter implements Filter {
 
     private static final String LOGIN_TARGET = "/login.xhtml";
     private static final String URI_PREFIX = "/vokki/";
 
+    @Inject
+    private UserSession userSession;
+    
     @Override
     public void destroy() {
     }
@@ -29,9 +33,6 @@ public class LoginFilter implements Filter {
 
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
-
-        final UserSession userSession = (UserSession) req.getSession()
-                .getAttribute("userSession");
 
         if (userSession == null) {
             redirectToLoginPage(req, res);

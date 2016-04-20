@@ -12,24 +12,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class Lections implements Serializable {
 
-    @EJB
+    @Inject
     private LectionManager lectionManager;
 
-    @EJB
+    @Inject
     private LanguageManager languageManager;
 
-    @ManagedProperty(value = "#{userSession}")
+    @Inject
     private UserSession userSession;
 
     private List<Language> languagesForUser;
