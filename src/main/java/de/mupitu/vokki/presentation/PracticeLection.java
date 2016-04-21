@@ -34,6 +34,8 @@ public class PracticeLection implements Serializable {
     private List<Word> words;
     
     private int wordIndex;
+    
+    private boolean solutionShown;
 
     public String loadLection() {
         lection = lectionManager.findById(lectionId);
@@ -63,13 +65,26 @@ public class PracticeLection implements Serializable {
         wordIndex++;
     }
     
-    public void reset() {
+    public void restart() {
         Collections.shuffle(words);
         wordIndex = 0;
     }
     
     public int getTotalWords() {
         return words.size();
+    }
+    
+    // ----- Rendering -----
+    public boolean isRenderShowSolutionButton() {
+        return !solutionShown;
+    }
+    
+    public boolean isRenderNextWordButton() {
+        return solutionShown && wordIndex < words.size() - 1;
+    }
+    
+    public boolean isRenderRestartButton() {
+        return solutionShown && wordIndex == words.size() - 1;
     }
     
     // ----- GET/SET -----
@@ -93,5 +108,12 @@ public class PracticeLection implements Serializable {
     public int getWordIndex() {
         return wordIndex + 1;
     }
-    
+
+    public boolean isSolutionShown() {
+        return solutionShown;
+    }
+
+    public void setSolutionShown(boolean solutionShown) {
+        this.solutionShown = solutionShown;
+    }
 }

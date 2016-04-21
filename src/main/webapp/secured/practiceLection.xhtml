@@ -18,9 +18,25 @@
             <ui:define name="content">              
                 <p:messages showDetail="true" />
 
-                Wort <h:outputText value="#{practiceLection.wordIndex}" /> von <h:outputText value="#{practiceLection.totalWords}" />
-                <br />
-                <h:outputText value="#{practiceLection.currentWord.foreignTerm}" />
+                <p:panel>
+                    <f:facet name="header">
+                        Vokabel <h:outputText value="#{practiceLection.wordIndex}" /> von <h:outputText value="#{practiceLection.totalWords}" />
+                    </f:facet>
+
+                    <p:panelGrid columns="2">
+                        <h:outputText value="#{practiceLection.lection.baseLanguage.name}:" />
+                        <h:outputText value="#{practiceLection.currentWord.formattedNativeTerms}" />
+
+                        <h:outputText value="#{practiceLection.lection.language.name}:" />
+                        <h:outputText value="#{practiceLection.currentWord.foreignTerm}" />
+                    </p:panelGrid>
+
+                    <h:form>
+                        <p:commandButton value="Lösung anzeigen" rendered="#{practiceLection.renderShowSolutionButton}" />
+                        <p:commandButton value="Nächste Vokabel anzeigen" rendered="#{practiceLection.renderNextWordButton}" />
+                        <p:commandButton value="Neustart" rendered="#{practiceLection.renderRestartButton}" />
+                    </h:form>
+                </p:panel>
             </ui:define>
         </ui:composition>
     </h:body>

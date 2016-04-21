@@ -207,4 +207,21 @@ public class Word extends JPAEntity {
 
         return foreignTerm.trim().equals(this.foreignTerm);
     }
+
+    public String getFormattedNativeTerms() {
+        final StringBuilder builder = new StringBuilder();
+        boolean first = true;
+
+        for (final String term : nativeTerms) {
+            if (first) {
+                first = false;
+            } else {
+                builder.append(", ");
+            }
+
+            builder.append(term);
+        }
+
+        return builder.toString();
+    }
 }
