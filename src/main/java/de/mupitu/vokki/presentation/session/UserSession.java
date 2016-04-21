@@ -3,7 +3,6 @@ package de.mupitu.vokki.presentation.session;
 import de.mupitu.vokki.business.users.boundary.UserManager;
 import de.mupitu.vokki.business.users.entity.User;
 import java.io.Serializable;
-import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
