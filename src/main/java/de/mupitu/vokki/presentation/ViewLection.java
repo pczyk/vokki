@@ -7,6 +7,8 @@ import de.mupitu.vokki.business.words.boundary.LectionManager;
 import de.mupitu.vokki.business.words.boundary.WordManager;
 import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.business.words.entity.Word;
+import de.mupitu.vokki.presentation.session.ExamSession;
+import de.mupitu.vokki.presentation.session.UserSession;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,6 +30,9 @@ public class ViewLection implements Serializable {
 
     @Inject
     private UserSession userSession;
+    
+    @Inject
+    private ExamSession examSession;
 
     private long lectionId;
 
@@ -98,6 +103,12 @@ public class ViewLection implements Serializable {
 
     public List<Word> getWords() {
         return words;
+    }
+    
+    public String startExam() {
+        examSession.setUpTest(words);
+        
+        return "exam";
     }
 
 }

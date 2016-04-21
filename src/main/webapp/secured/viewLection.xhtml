@@ -43,6 +43,10 @@
                 </p:link>
                 <br />
                 <p:link outcome="lections" value="Zu Lektionen zurückkehren" />
+                <br />
+                <h:form>
+                    <p:commandLink value="Lektion prüfen" action="#{viewLection.startExam}" ajax="false" />
+                </h:form>
             </ui:define>
         </ui:composition>           
     </h:body>

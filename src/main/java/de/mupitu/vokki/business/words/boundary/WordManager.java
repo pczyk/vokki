@@ -5,7 +5,6 @@ import de.mupitu.vokki.business.words.entity.Language;
 import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.business.words.entity.Word;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -44,11 +43,12 @@ public class WordManager {
         }
     }
 
-    public List<Word> getUrgentWordsForUser(final User user, final Language language) {
+    public List<Word> getOverdueWordsForUser(final User user, final Language language) {
         return em
-                .createQuery("SELECT w FROM Word w WHERE w.lection.language=:language AND w.lection.owner=:user", Word.class)
+                .createQuery("SELECT w FROM Word w WHERE w.lection.language=:language AND w.lection.owner=:user AND w.nextExerciseDate <= :now", Word.class)
                 .setParameter("language", language)
                 .setParameter("user", user)
+                .setParameter("now", LocalDate.now())
                 .getResultList();
     }
 }

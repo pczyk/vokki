@@ -4,6 +4,7 @@ import de.mupitu.vokki.business.words.boundary.LectionManager;
 import de.mupitu.vokki.business.words.boundary.WordManager;
 import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.business.words.entity.Word;
+import de.mupitu.vokki.presentation.session.UserSession;
 import de.mupitu.vokki.presentation.utils.PrimeFacesKeyboardUtils;
 import java.io.Serializable;
 import java.util.HashSet;

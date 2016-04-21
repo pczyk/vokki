@@ -177,6 +177,9 @@ public class Word extends JPAEntity {
     }
 
     // --------------
+    /**
+     * Creates and returns a new Word instance
+     */
     public static Word createWord(final String foreignTerm,
             final Set<String> nativeTerms, final Lection lection, final String comment) {
         final Word word = new Word();
@@ -187,5 +190,21 @@ public class Word extends JPAEntity {
         word.setComment(comment);
 
         return word;
+    }
+
+    /**
+     * Checks whether a foreign term is correct for this word (e.g. for exam
+     * situations)
+     *
+     * @param foreignTerm the foreign term to check
+     * @return <code>true</code> if foreign term is correct, <code>false</code>
+     * otherwise
+     */
+    public boolean isCorrectForeignTerm(final String foreignTerm) {
+        if (foreignTerm == null) {
+            return false;
+        }
+
+        return foreignTerm.trim().equals(this.foreignTerm);
     }
 }

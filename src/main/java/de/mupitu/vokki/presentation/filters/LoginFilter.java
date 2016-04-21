@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import de.mupitu.vokki.presentation.UserSession;
+import de.mupitu.vokki.presentation.session.UserSession;
 import javax.inject.Inject;
 
 public class LoginFilter implements Filter {

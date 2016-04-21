@@ -1,4 +1,4 @@
-package de.mupitu.vokki.presentation;
+package de.mupitu.vokki.presentation.session;
 
 import de.mupitu.vokki.business.users.boundary.UserManager;
 import de.mupitu.vokki.business.users.entity.User;
