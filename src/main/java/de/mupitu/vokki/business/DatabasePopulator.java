@@ -8,7 +8,6 @@ import de.unidue.s3.bcrypt.BCrypt;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -46,6 +45,9 @@ public class DatabasePopulator {
         createLection("Lekcja Pierwsza", "Erste polnische Lektion", languagePolish, languageGerman, userMartin);
         createWord(lectionOne, "hello", null, "hallo");
         createWord(lectionOne, "play", "Theater", "Schauspiel", "Aufführung");
+        createWord(lectionOne, "to open", null, "öffen");
+        createWord(lectionOne, "free", null, "frei");
+        createWord(lectionOne, "house", null, "Haus");
     }
     
     private void createLanguages() {

@@ -18,7 +18,11 @@
             <ui:define name="content">              
                 <p:messages showDetail="true" />
 
-                <p:panel id="wordPanel">
+                <p:panel id="noWordsPanel" rendered="#{practiceLection.totalWords == 0}">
+                    Die Lektion enthält keine Vokabeln.
+                </p:panel>
+                
+                <p:panel id="wordPanel" rendered="#{practiceLection.totalWords > 0}">
                     <f:facet name="header">
                         Vokabel <h:outputText value="#{practiceLection.wordIndex}" /> von <h:outputText value="#{practiceLection.totalWords}" />
                     </f:facet>
@@ -26,6 +30,9 @@
                     <p:panelGrid columns="2">
                         <h:outputText value="#{practiceLection.lection.baseLanguage.name}:" />
                         <h:outputText value="#{practiceLection.currentWord.formattedNativeTerms}" />
+                        
+                        <h:outputText value="" rendered="#{practiceLection.currentWord.comment ne null}"/>
+                        <h:outputText value="(#{practiceLection.currentWord.comment})" rendered="#{practiceLection.currentWord.comment ne null}"/>
 
                         <h:outputText value="#{practiceLection.lection.language.name}:" />
                         <h:outputText value="???" rendered="#{!practiceLection.solutionShown}" />
