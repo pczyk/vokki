@@ -18,7 +18,7 @@
             <ui:define name="content">              
                 <p:messages showDetail="true" />
 
-                <p:panel>
+                <p:panel id="wordPanel">
                     <f:facet name="header">
                         Vokabel <h:outputText value="#{practiceLection.wordIndex}" /> von <h:outputText value="#{practiceLection.totalWords}" />
                     </f:facet>
@@ -28,13 +28,14 @@
                         <h:outputText value="#{practiceLection.currentWord.formattedNativeTerms}" />
 
                         <h:outputText value="#{practiceLection.lection.language.name}:" />
-                        <h:outputText value="#{practiceLection.currentWord.foreignTerm}" />
+                        <h:outputText value="???" rendered="#{!practiceLection.solutionShown}" />
+                        <h:outputText value="#{practiceLection.currentWord.foreignTerm}" rendered="#{practiceLection.solutionShown}" />
                     </p:panelGrid>
 
                     <h:form>
-                        <p:commandButton value="Lösung anzeigen" rendered="#{practiceLection.renderShowSolutionButton}" />
-                        <p:commandButton value="Nächste Vokabel anzeigen" rendered="#{practiceLection.renderNextWordButton}" />
-                        <p:commandButton value="Neustart" rendered="#{practiceLection.renderRestartButton}" />
+                        <p:commandButton value="Lösung anzeigen" rendered="#{practiceLection.renderShowSolutionButton}" action="#{practiceLection.showSolution}" update="wordPanel" />
+                        <p:commandButton value="Nächste Vokabel anzeigen" rendered="#{practiceLection.renderNextWordButton}" action="#{practiceLection.showNextWord()}" update="wordPanel" />
+                        <p:commandButton value="Neustart" rendered="#{practiceLection.renderRestartButton}" action="#{practiceLection.restart()}" update="wordPanel" />
                     </h:form>
                 </p:panel>
             </ui:define>

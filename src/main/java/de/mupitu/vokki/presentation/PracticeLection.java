@@ -26,15 +26,15 @@ public class PracticeLection implements Serializable {
 
     @Inject
     UserSession userSession;
-    
+
     private long lectionId;
 
     private Lection lection;
 
     private List<Word> words;
-    
+
     private int wordIndex;
-    
+
     private boolean solutionShown;
 
     public String loadLection() {
@@ -52,43 +52,47 @@ public class PracticeLection implements Serializable {
 
         return null;
     }
-    
+
     public boolean isLectionComplete() {
         return wordIndex == words.size();
     }
-    
+
     public Word getCurrentWord() {
         return words.get(wordIndex);
     }
-    
-    public void nextWord() {
-        wordIndex++;
-    }
-    
+
     public void restart() {
         Collections.shuffle(words);
         wordIndex = 0;
     }
-    
+
     public int getTotalWords() {
         return words.size();
     }
-    
+
+    public void showSolution() {
+        solutionShown = true;
+    }
+
+    public void showNextWord() {
+        solutionShown = false;
+        wordIndex++;
+    }
+
     // ----- Rendering -----
     public boolean isRenderShowSolutionButton() {
         return !solutionShown;
     }
-    
+
     public boolean isRenderNextWordButton() {
         return solutionShown && wordIndex < words.size() - 1;
     }
-    
+
     public boolean isRenderRestartButton() {
         return solutionShown && wordIndex == words.size() - 1;
     }
-    
-    // ----- GET/SET -----
 
+    // ----- GET/SET -----
     public long getLectionId() {
         return lectionId;
     }
