@@ -47,8 +47,8 @@ public class PracticeLection implements Serializable {
         if (lection == null || !userSession.getCurrentUser().equals(lection.getOwner())) {
             final FacesContext context = FacesContext.getCurrentInstance();
             try {
-                // TODO
-                context.getExternalContext().responseSendError(400, "lorem");
+                context.getExternalContext().responseSendError(HttpServletResponse.SC_BAD_REQUEST, "ungültige Lektions-ID");
+                context.responseComplete();
             } catch (IOException ex) {
                 Logger.getLogger(PracticeLection.class.getName()).log(Level.SEVERE, null, ex);
             }
