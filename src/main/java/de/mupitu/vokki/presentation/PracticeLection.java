@@ -5,22 +5,15 @@ import de.mupitu.vokki.business.words.boundary.WordManager;
 import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.business.words.entity.Word;
 import de.mupitu.vokki.presentation.session.UserSession;
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletResponse;
 
 @Named
 @ViewScoped
-public class PracticeLection implements Serializable {
+public class PracticeLection extends BaseController {
 
     @Inject
     WordManager wordManager;
@@ -45,14 +38,7 @@ public class PracticeLection implements Serializable {
         lection = lectionManager.findById(lectionId);
 
         if (lection == null || !userSession.getCurrentUser().equals(lection.getOwner())) {
-            final FacesContext context = FacesContext.getCurrentInstance();
-            try {
-                context.getExternalContext().responseSendError(HttpServletResponse.SC_BAD_REQUEST, "ungültige Lektions-ID");
-                context.responseComplete();
-            } catch (IOException ex) {
-                Logger.getLogger(PracticeLection.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            sendBadRequestResponse("ungültige Lektions-ID");
         } else {
             words = wordManager.getWordsForLection(lection);
             Collections.shuffle(words);

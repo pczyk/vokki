@@ -6,7 +6,6 @@ import de.mupitu.vokki.business.words.boundary.LectionManager;
 import de.mupitu.vokki.business.words.entity.Language;
 import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.presentation.session.UserSession;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +20,7 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class Lections implements Serializable {
+public class Lections extends BaseController {
 
     @Inject
     private LectionManager lectionManager;

@@ -3,7 +3,6 @@ package de.mupitu.vokki.presentation;
 import de.mupitu.vokki.business.users.entity.User;
 import de.mupitu.vokki.business.words.boundary.LanguageManager;
 import de.mupitu.vokki.business.words.entity.Language;
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -12,7 +11,7 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class Register implements Serializable {
+public class Register extends BaseController {
 
     // Injections
     @Inject

@@ -1,7 +1,5 @@
 package de.mupitu.vokki.presentation;
 
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 import de.mupitu.vokki.business.words.boundary.LectionManager;
 import de.mupitu.vokki.business.words.boundary.WordManager;
@@ -9,18 +7,15 @@ import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.business.words.entity.Word;
 import de.mupitu.vokki.presentation.session.ExamSession;
 import de.mupitu.vokki.presentation.session.UserSession;
-import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class ViewLection implements Serializable {
+public class ViewLection extends BaseController {
 
     @Inject
     LectionManager lectionManager;

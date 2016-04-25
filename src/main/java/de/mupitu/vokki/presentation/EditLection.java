@@ -6,7 +6,6 @@ import de.mupitu.vokki.business.words.entity.Lection;
 import de.mupitu.vokki.business.words.entity.Word;
 import de.mupitu.vokki.presentation.session.UserSession;
 import de.mupitu.vokki.presentation.utils.PrimeFacesKeyboardUtils;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +18,7 @@ import javax.inject.Named;
 
 @Named
 @ViewScoped
-public class EditLection implements Serializable {
+public class EditLection extends BaseController {
 
     @Inject
     LectionManager lectionManager;
