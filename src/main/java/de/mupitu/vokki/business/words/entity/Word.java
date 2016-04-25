@@ -36,8 +36,8 @@ public class Word extends JPAEntity {
     static final String PREFIX = "de.mupitu.vokki.business.words.entity.Word.";
     public static final String findAll = PREFIX + "findAll";
 
-    public static final int MIN_LEVEL = 0;
-    public static final int MAX_LEVEL = 6;
+    public static final int MIN_LEVEL = 1;
+    public static final int MAX_LEVEL = 7;
 
     @Id
     @GeneratedValue
@@ -55,7 +55,7 @@ public class Word extends JPAEntity {
     @Column(nullable = false)
     @Min(value = MIN_LEVEL)
     @Max(value = MAX_LEVEL)
-    private int wordLevel;
+    private int wordLevel = 1;
 
     @Column
     private LocalDateTime lastPracticed;

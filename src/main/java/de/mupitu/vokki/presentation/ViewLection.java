@@ -25,7 +25,7 @@ public class ViewLection extends BaseController {
 
     @Inject
     private UserSession userSession;
-    
+
     @Inject
     private ExamSession examSession;
 
@@ -48,6 +48,14 @@ public class ViewLection extends BaseController {
         }
 
         return null;
+    }
+
+    public double getPercentageForWord(final Word word) {
+        if (word == null || word.getNumberOfTests() == 0) {
+            return 0.0;
+        }
+
+        return ((double) word.getNumberOfCorrectAnswers()) / word.getNumberOfTests();
     }
 
     // --- getters and setters ---
@@ -82,27 +90,27 @@ public class ViewLection extends BaseController {
     public String formatNativeTerms(final Word word) {
         final StringBuilder builder = new StringBuilder();
         boolean first = true;
-        
-        for(final String term : word.getNativeTerms()) {
-            if(first) {
+
+        for (final String term : word.getNativeTerms()) {
+            if (first) {
                 first = false;
             } else {
                 builder.append(", ");
             }
-            
+
             builder.append(term);
         }
-        
+
         return builder.toString();
     }
 
     public List<Word> getWords() {
         return words;
     }
-    
+
     public String startExam() {
         examSession.setUpTest(words);
-        
+
         return "exam";
     }
 
