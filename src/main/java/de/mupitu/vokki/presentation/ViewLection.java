@@ -8,8 +8,6 @@ import de.mupitu.vokki.business.words.entity.Word;
 import de.mupitu.vokki.presentation.session.ExamSession;
 import de.mupitu.vokki.presentation.session.UserSession;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -39,10 +37,7 @@ public class ViewLection extends BaseController {
         lection = lectionManager.findById(lectionId);
 
         if (lection == null || !userSession.getCurrentUser().equals(lection.getOwner())) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "Unbekannte Lektion",
-                            String.format("Die Lektion mit der ID '%d' existiert nicht.", lectionId)));
+            sendBadRequestResponse("ungültige Lektions-ID");
         } else {
             words = wordManager.getWordsForLection(lection);
         }

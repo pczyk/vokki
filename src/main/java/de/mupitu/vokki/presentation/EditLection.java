@@ -47,15 +47,11 @@ public class EditLection extends BaseController {
         lection = lectionManager.findById(lectionId);
 
         if (lection == null || !userSession.getCurrentUser().equals(lection.getOwner())) {
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                            "Unbekannte Lektion",
-                            String.format("Die Lektion mit der ID '%d' existiert nicht.", lectionId)));
+            sendBadRequestResponse("ungültige Lektions-ID");
         } else {
             words = wordManager.getWordsForLection(lection);
+            keyboardLayout = PrimeFacesKeyboardUtils.getLayoutTemplateForLanguage(lection.getLanguage());
         }
-
-        keyboardLayout = PrimeFacesKeyboardUtils.getLayoutTemplateForLanguage(lection.getLanguage());
 
         return null;
     }
