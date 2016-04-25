@@ -46,13 +46,13 @@
                         <h:outputText value="#{word.comment}" />
                     </p:column>                    
 
-                    <p:column sortBy="#{word.wordLevel}">
+                    <p:column sortBy="#{word.level}">
                         <f:facet name="header">
                             <h:outputText value="Level" />
                         </f:facet>
 
                         <h:form>
-                            <p:rating value="#{word.wordLevel}" stars="7" readonly="true" />
+                            <p:rating value="#{word.level}" stars="7" readonly="true" />
                         </h:form>
                     </p:column>                    
 

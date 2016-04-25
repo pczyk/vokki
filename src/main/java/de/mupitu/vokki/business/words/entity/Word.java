@@ -55,7 +55,7 @@ public class Word extends JPAEntity {
     @Column(nullable = false)
     @Min(value = MIN_LEVEL)
     @Max(value = MAX_LEVEL)
-    private int wordLevel = 1;
+    private int level = 1;
 
     @Column
     private LocalDateTime lastPracticed;
@@ -112,12 +112,8 @@ public class Word extends JPAEntity {
         this.comment = comment;
     }
 
-    public int getWordLevel() {
-        return wordLevel;
-    }
-
-    public void setWordLevel(int wordLevel) {
-        this.wordLevel = wordLevel;
+    public int getLevel() {
+        return level;
     }
 
     public LocalDateTime getLastPracticed() {
@@ -133,7 +129,7 @@ public class Word extends JPAEntity {
             throw new IllegalArgumentException();
         }
 
-        this.wordLevel = wordLevel;
+        this.level = wordLevel;
     }
 
     public Lection getLection() {
