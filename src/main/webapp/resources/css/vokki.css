@@ -3,3 +3,7 @@
 body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
+div.ui-panel {
+    margin-bottom: 10px;
+}

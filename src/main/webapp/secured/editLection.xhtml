@@ -9,10 +9,12 @@
         <title>vokki.org</title>
     </h:head>
     <f:metadata>
-        <f:viewParam id="id" name="id" value="#{editLection.lectionId}"/>
+        <f:viewParam id="id" name="id" value="#{editLection.lectionId}" required="true">
+            <f:validateLongRange minimum="0" />
+        </f:viewParam>
         <f:viewAction action="#{editLection.loadLection}"/>
     </f:metadata>    
-    <h:body>
+    <h:body>        
         <ui:composition template="templates/template.xhtml">
             <ui:define name="pageTitle">Lektion '<h:outputText value="#{editLection.lection.name}" />' bearbeiten</ui:define>
             <ui:define name="content">              
