@@ -65,7 +65,7 @@ public class UserManager {
         if (users != null && users.size() == 1) {
             user = users.get(0);
 
-            if (user != null && checkPassword(password, user.getPassword())) {
+            if (user != null && checkPassword(password, user.getPasswordHash())) {
                 return user;
             } else {
                 return null;
@@ -81,7 +81,7 @@ public class UserManager {
 
     public User changePassword(final User user, final String password) {
         final User attachedUser = findById(user.getId());
-        attachedUser.setPassword(BCrypt.hash(password));
+        attachedUser.setPasswordHash(BCrypt.hash(password));
         return save(attachedUser);
     }
     

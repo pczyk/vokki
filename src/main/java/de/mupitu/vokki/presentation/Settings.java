@@ -29,7 +29,7 @@ public class Settings extends BaseController {
         final User user = getUser();
         final FacesContext context = FacesContext.getCurrentInstance();
 
-        if (!userManager.checkPassword(oldPassword, user.getPassword())) {
+        if (!userManager.checkPassword(oldPassword, user.getPasswordHash())) {
             final String message = "Das alte Passwort stimmt nicht mit dem aktuellen Passwort überein";
             context.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,

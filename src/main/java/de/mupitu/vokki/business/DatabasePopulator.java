@@ -76,7 +76,7 @@ public class DatabasePopulator {
         user.setEmailAddress(emailAddress);
         user.setUsername(login);
         user.setRegisterDate(LocalDate.now());
-        user.setPassword(BCrypt.hash(password));
+        user.setPasswordHash(BCrypt.hash(password));
         user.setLanguage(lang);
         
         em.persist(user);

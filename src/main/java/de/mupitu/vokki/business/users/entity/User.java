@@ -3,7 +3,6 @@ package de.mupitu.vokki.business.users.entity;
 import de.mupitu.vokki.business.JPAEntity;
 import static de.mupitu.vokki.business.users.entity.User.findAll;
 import de.mupitu.vokki.business.words.entity.Language;
-;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,7 +36,7 @@ public class User extends JPAEntity {
     private String username;
 
     @Column(nullable = false)
-    private String password;
+    private String passwordHash;
 
     @Column(nullable = false)
     private String emailAddress;
@@ -69,12 +68,12 @@ public class User extends JPAEntity {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getEmailAddress() {
