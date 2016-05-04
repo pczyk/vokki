@@ -65,7 +65,7 @@ public class UserManager {
         if (users != null && users.size() == 1) {
             user = users.get(0);
 
-            if (user != null && BCrypt.check(password, user.getPassword())) {
+            if (user != null && checkPassword(password, user.getPassword())) {
                 return user;
             } else {
                 return null;
@@ -75,6 +75,16 @@ public class UserManager {
         return null;
     }
 
+    public boolean checkPassword(final String password, final String hashedPassword) {
+        return BCrypt.check(password, hashedPassword);
+    }
+
+    public User changePassword(final User user, final String password) {
+        final User attachedUser = findById(user.getId());
+        attachedUser.setPassword(BCrypt.hash(password));
+        return save(attachedUser);
+    }
+    
     public User updateLastLogin(final User user) {
         final User attachedUser = findById(user.getId());
         attachedUser.setLastLogin(LocalDate.now());

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>vokki.org</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="templates/template.xhtml">
+            <ui:define name="pageTitle">Einstellungen</ui:define>
+            <ui:define name="content">     
+                <p:growl autoUpdate="true" />
+                
+                <p:panel header="Benutzer">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel for="username" value="Benutzername:" />
+                        <h:outputText id="username" value="#{settings.user.username}" />
+
+                        <p:outputLabel for="emailAddress" value="Benutzername:" />
+                        <h:outputText id="emailAddress" value="#{settings.user.emailAddress}" />
+
+                        <p:outputLabel for="registered" value="Registrierung:" />
+                        <h:outputText id="registered" value="#{settings.user.registerDate}" />
+                    </p:panelGrid>
+                </p:panel>
+
+                <p:panel header="Passwort ändern" collapsed="true" toggleable="true">
+                    <h:form>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel for="oldPassword" value="Altes Passwort:" />
+                            <p:password id="oldPassword" required="true" feedback="false" value="#{settings.oldPassword}" />
+                            
+                            <p:outputLabel for="newPassword" value="Neues Passwort:" />
+                            <p:password id="newPassword" required="true" feedback="true" value="#{settings.newPassword}" />
+                            
+                            <p:outputLabel for="newPasswordRepeat" value="Neues Passwort (Wiederholung):" />
+                            <p:password id="newPasswordRepeat" required="true" feedback="false" value="#{settings.newPasswordRepeat}" />
+                        </p:panelGrid>
+                        
+                        <p:commandButton value="Passwort ändern" action="#{settings.changePassword()}" />
+                    </h:form>
+                </p:panel>
+
+            </ui:define>
+        </ui:composition>        
+    </h:body>
+</html>
+
