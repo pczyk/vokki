@@ -1,5 +1,6 @@
 package de.mupitu.vokki.presentation;
 
+import de.mupitu.vokki.business.words.entity.Language;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class BaseController implements Serializable {
 
+    private static final String FLAG_BASE_PATH = "images/";
+    
     /**
      * Sends a HTTP Bad Request (400) to the client and completes the response
      *
@@ -32,5 +35,9 @@ public abstract class BaseController implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(BaseController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String getFlagPathForLanguage(final Language language) {
+        return FLAG_BASE_PATH + language.getFlagPath();
     }
 }

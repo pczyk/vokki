@@ -112,4 +112,8 @@ public class PracticeLection extends BaseController {
     public void setSolutionShown(boolean solutionShown) {
         this.solutionShown = solutionShown;
     }
+    
+    public String getLanguageFlagPath() {
+        return getFlagPathForLanguage(lection.getLanguage());
+    }
 }

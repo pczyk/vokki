@@ -14,7 +14,7 @@
     </f:metadata>    
     <h:body>
         <ui:composition template="templates/template.xhtml">
-            <ui:define name="pageTitle">Übung '<h:outputText value="#{practiceLection.lection.name}" />'</ui:define>
+            <ui:define name="pageTitle">Übung '<h:outputText value="#{practiceLection.lection.name}" />' <h:graphicImage name="#{practiceLection.languageFlagPath}" /></ui:define>
             <ui:define name="content">              
                 <p:messages showDetail="true" />
 
