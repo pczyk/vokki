@@ -109,4 +109,7 @@ public class ViewLection extends BaseController {
         return "exam";
     }
 
+    public String getLanguageFlagPath() {
+        return getFlagPathForLanguage(lection.getLanguage());
+    }
 }

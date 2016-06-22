@@ -20,6 +20,7 @@
                 <p:messages showDetail="true" />
 
                 <h:outputText value="#{viewLection.lection.language.name}" rendered="#{viewLection.lection ne null}" />
+                <h:graphicImage name="#{viewLection.languageFlagPath}" rendered="#{viewLection.lection ne null}" />
 
                 <p:dataTable value="#{viewLection.words}" var="word" >
                     <p:column sortBy="#{word.foreignTerm}">

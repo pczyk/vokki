@@ -21,7 +21,8 @@
                 <p:messages showDetail="true" />
 
                 <h:outputText value="#{editLection.lection.language.name}" rendered="#{editLection.lection ne null}" />
-
+                <h:graphicImage name="#{editLection.languageFlagPath}" rendered="#{editLection.lection ne null}" />
+                
                 <h:form>
                     <p:dataTable id="wordTable" value="#{editLection.words}" var="word">
                         <p:column>

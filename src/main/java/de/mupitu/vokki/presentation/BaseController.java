@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class BaseController implements Serializable {
 
-    private static final String FLAG_BASE_PATH = "images/";
-    
+    private static final String FLAG_BASE_PATH = "images/flags/";
+
     /**
      * Sends a HTTP Bad Request (400) to the client and completes the response
      *
@@ -36,8 +36,12 @@ public abstract class BaseController implements Serializable {
             Logger.getLogger(BaseController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public String getFlagPathForLanguage(final Language language) {
+        if (language == null) {
+            return null;
+        }
+
         return FLAG_BASE_PATH + language.getFlagPath();
     }
 }

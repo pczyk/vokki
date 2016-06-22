@@ -23,14 +23,15 @@
                         <p:inputText placeholder="Lektionsname" value="#{lections.newLectionName}" /><br />
                         <p:inputTextarea placeholder="Beschreibung" value="#{lections.newLectionDescription}" /><br />
                         <p:selectOneMenu value="#{lections.newLectionLanguage}" var="language" converter="omnifaces.SelectItemsConverter">
-                            <!-- <f:selectItem itemLabel="Sprache" noSelectionOption="true" /> -->
+                            <f:selectItem itemLabel="Sprache" noSelectionOption="true" />
+                            
                             <f:selectItems value="#{lections.languages}" var="lang" itemLabel="#{lang.name}" />
-                                        <p:column style="width:10%">
-                                            <h:graphicImage name="#{lections.getFlagPathForLanguage(language)}" />
-            </p:column>
-                             <p:column>
-                                 <h:outputText value="#{language.name}" />
-            </p:column>
+                            <p:column style="width:10%">
+                                <h:graphicImage name="#{lections.getFlagPathForLanguage(language)}" />
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{language.name}" />
+                            </p:column>
                         </p:selectOneMenu><br />
                         <f:facet name="footer">
                             <p:commandButton value="Lektion anlegen" update="@all" actionListener="#{lections.createLection()}"

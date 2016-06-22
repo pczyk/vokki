@@ -180,4 +180,7 @@ public class EditLection extends BaseController {
         return keyboardLayout;
     }
 
+    public String getLanguageFlagPath() {
+        return getFlagPathForLanguage(lection.getLanguage());
+    }
 }
