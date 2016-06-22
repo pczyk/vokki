@@ -1,5 +1,7 @@
 package de.mupitu.vokki.presentation.session;
 
+import de.mupitu.vokki.business.statistics.boundary.LoginActionManager;
+import de.mupitu.vokki.business.statistics.entity.LoginAction;
 import de.mupitu.vokki.business.users.boundary.UserManager;
 import de.mupitu.vokki.business.users.entity.User;
 import java.io.Serializable;
@@ -12,6 +14,12 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class UserSession implements Serializable {
+
+    @Inject
+    private UserManager userManager;
+
+    @Inject
+    private LoginActionManager loginActionManager;
 
     private String username;
     private String password;
@@ -26,9 +34,6 @@ public class UserSession implements Serializable {
     public void setRequestedPage(final String requestedPage) {
         this.requestedPage = requestedPage;
     }
-
-    @Inject
-    private UserManager userManager;
 
     public String getUsername() {
         return username;
@@ -63,7 +68,8 @@ public class UserSession implements Serializable {
             return "";
         } else {
             currentUser = userManager.updateLastLogin(currentUser);
-
+            loginActionManager.save(LoginAction.newInstance(currentUser));
+            
             if (requestedPage != null) {
                 System.out.println("requested page = " + requestedPage);
                 return requestedPage;

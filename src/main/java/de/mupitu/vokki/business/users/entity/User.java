@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User extends JPAEntity {
 
-    private static final String PREFIX = "de.mupitu.vokki.business.users.entity.";
+    private static final String PREFIX = "de.mupitu.vokki.business.users.entity.User.";
     public static final String findAll = PREFIX + "findAll";
 
     @Id
