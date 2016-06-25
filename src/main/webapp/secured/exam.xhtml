@@ -16,7 +16,24 @@
             <ui:define name="content">              
                 <p:messages showDetail="true" />
 
-                <h:outputText value="#{exam.examActive}"/>
+                <p:outputPanel id="outerPanel">
+                    <p:panel header="Fehler" rendered="#{examSession.examInactive}">
+                        Keine Prüfung aktiv.
+                    </p:panel>
+
+                    <p:panel header="Neue Prüfung" rendered="#{examSession.examReady}">
+                        Willkommen zum Prüfungs-Modus! Deine aktuelle Prüfung in der Sprache <h:outputText value="#{examSession.language.name}" /> umfasst <h:outputText value="#{examSession.numberOfWords}" /> Wörter.
+                        <br />
+                        Bist du bereit? Klicke auf den Button, um deine Prüfung zu starten!
+                        <h:form>
+                            <p:commandButton value="Prüfung starten" actionListener="#{examSession.startTest()}" update="outerPanel" />
+                        </h:form>
+                    </p:panel>
+                    
+                    <p:panel header="Prüfung" rendered="#{examSession.examActive}">
+                        Prüfung läuft!
+                    </p:panel>
+                </p:outputPanel>
             </ui:define>
         </ui:composition>
     </h:body>

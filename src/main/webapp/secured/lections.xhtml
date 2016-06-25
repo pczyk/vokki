@@ -24,7 +24,7 @@
                         <p:inputTextarea placeholder="Beschreibung" value="#{lections.newLectionDescription}" /><br />
                         <p:selectOneMenu value="#{lections.newLectionLanguage}" var="language" converter="omnifaces.SelectItemsConverter">
                             <f:selectItem itemLabel="Sprache" noSelectionOption="true" />
-                            
+
                             <f:selectItems value="#{lections.languages}" var="lang" itemLabel="#{lang.name}" />
                             <p:column style="width:10%">
                                 <h:graphicImage name="#{lections.getFlagPathForLanguage(language)}" />
@@ -88,15 +88,21 @@
                                     Aktion
                                 </f:facet>
 
-                                <p:button icon="fa fa-eye" outcome="viewLection">
-                                    <f:param name="id" value="#{lection.id}" />                            
-                                </p:button>
-                                <p:button icon="fa fa-edit" outcome="editLection">
-                                    <f:param name="id" value="#{lection.id}" />                            
-                                </p:button>
-                                <p:button icon="fa fa-book" outcome="practiceLection" disabled="#{lections.getNumberOfWordsInLection(lection) == 0}">
-                                    <f:param name="id" value="#{lection.id}" />                            
-                                </p:button>
+                                <h:form>
+                                    <p:button icon="fa fa-eye" outcome="viewLection">
+                                        <f:param name="id" value="#{lection.id}" />                            
+                                    </p:button>
+
+                                    <p:button icon="fa fa-edit" outcome="editLection">
+                                        <f:param name="id" value="#{lection.id}" />                            
+                                    </p:button>
+
+                                    <p:button icon="fa fa-book" outcome="practiceLection" disabled="#{lections.isDiableLection(lection)}">
+                                        <f:param name="id" value="#{lection.id}" />                            
+                                    </p:button>
+
+                                    <p:commandButton icon="fa fa-heartbeat" actionListener="#{lections.startExam(lection)}" disabled="#{lections.isDiableLection(lection)}" />
+                                </h:form>
                             </p:column>                    
                         </p:dataTable>
                     </p:panel>
