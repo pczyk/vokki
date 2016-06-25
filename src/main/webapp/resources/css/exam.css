@@ -1,3 +1,7 @@
 .correctnessIcon {
     max-width: 48px;
 }
+
+.correctnessIconSmall {
+    max-height: 16px;
+}

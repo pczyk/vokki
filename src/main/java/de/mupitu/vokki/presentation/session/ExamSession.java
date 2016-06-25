@@ -8,7 +8,10 @@ import javax.inject.Named;
 import de.mupitu.vokki.business.words.entity.Word;
 import de.mupitu.vokki.presentation.utils.PrimeFacesKeyboardUtils;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import javax.inject.Inject;
 
@@ -36,12 +39,17 @@ public class ExamSession implements Serializable {
     private String keyboardLayout;
     private String submittedWord;
     private Boolean lastWordResult;
+    
+    private List<Word> correctWords;
+    private Map<Word, String> answers;
 
     public void setUpTest(final List<Word> words, final Language language, final Language baseLanguage) {
         Objects.requireNonNull(language, "parameter 'words' must not be null");
         Objects.requireNonNull(language, "parameter 'language' must not be null");
 
         this.words = Collections.unmodifiableList(words);
+        this.correctWords = new LinkedList<>();
+        this.answers = new HashMap<>();
         this.language = language;
         this.baseLanguage = baseLanguage;
 
@@ -113,6 +121,11 @@ public class ExamSession implements Serializable {
         final Word currentWord = getCurrentWord();
         
         lastWordResult = currentWord.isCorrectForeignTerm(submittedWord);
+        answers.put(currentWord, submittedWord);
+        if(Boolean.TRUE.equals(lastWordResult)) {
+            correctWords.add(currentWord);
+        }
+        
         submittedWord = null;
         
         wordIndex++;
@@ -128,5 +141,17 @@ public class ExamSession implements Serializable {
 
     public Boolean getLastWordResult() {
         return lastWordResult;
+    }
+    
+    public boolean isCorrect(final Word word) {
+        return correctWords.contains(word);
+    }
+    
+    public List<Word> getWords() {
+        return words;
+    }
+    
+    public String getAnswerForWord(final Word word) {
+        return answers.get(word);
     }
 }

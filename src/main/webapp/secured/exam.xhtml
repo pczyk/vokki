@@ -12,9 +12,9 @@
     </f:metadata>    
     <h:body>
         <ui:composition template="templates/template.xhtml">
-            <h:outputStylesheet name="css/exam.css" />
             <ui:define name="pageTitle">Prüfung</ui:define>
             <ui:define name="content">              
+                <h:outputStylesheet name="css/exam.css" />
                 <p:messages showDetail="true" />
 
                 <p:outputPanel id="outerPanel">
@@ -63,7 +63,30 @@
                     </p:panel>
 
                     <p:panel header="Prüfung beendet" rendered="#{examSession.examCompleted}">
-                        Yo.
+                        <strong>Ergebnisse</strong>
+
+                        <p:dataTable value="#{examSession.words}" var="word">
+                            <f:facet name="header">
+                                Geprüfte Wörter
+                            </f:facet>
+
+                            <p:column headerText="#{examSession.baseLanguageName}">
+                                <h:outputText value="#{word.formattedNativeTerms}" />
+                            </p:column>
+
+                            <p:column headerText="#{examSession.languageName}">
+                                <h:outputText value="#{word.foreignTerm}" />
+                            </p:column>
+
+                            <p:column headerText="Antwort">
+                                <h:outputText value="#{examSession.getAnswerForWord(word)}" />
+                            </p:column>
+
+                            <p:column headerText="Korrekt">
+                                <p:graphicImage name="images/tick_green.png" styleClass="correctnessIconSmall" rendered="#{examSession.isCorrect(word)}" />
+                                <p:graphicImage name="images/close_red.png" styleClass="correctnessIconSmall" rendered="#{!examSession.isCorrect(word)}" />
+                            </p:column>
+                        </p:dataTable>
                     </p:panel>
                 </p:outputPanel>
             </ui:define>
