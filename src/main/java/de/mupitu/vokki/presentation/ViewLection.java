@@ -104,7 +104,7 @@ public class ViewLection extends BaseController {
     }
 
     public String startExam() {
-        examSession.setUpTest(words, lection.getLanguage());
+        examSession.setUpTest(words, lection.getLanguage(), lection.getBaseLanguage());
 
         return "exam";
     }

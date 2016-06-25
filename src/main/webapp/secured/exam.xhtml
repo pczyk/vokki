@@ -12,6 +12,7 @@
     </f:metadata>    
     <h:body>
         <ui:composition template="templates/template.xhtml">
+            <h:outputStylesheet name="css/exam.css" />
             <ui:define name="pageTitle">Prüfung</ui:define>
             <ui:define name="content">              
                 <p:messages showDetail="true" />
@@ -22,16 +23,47 @@
                     </p:panel>
 
                     <p:panel header="Neue Prüfung" rendered="#{examSession.examReady}">
-                        Willkommen zum Prüfungs-Modus! Deine aktuelle Prüfung in der Sprache <h:outputText value="#{examSession.language.name}" /> umfasst <h:outputText value="#{examSession.numberOfWords}" /> Wörter.
+                        Willkommen zum Prüfungs-Modus! Deine aktuelle Prüfung in der Sprache <h:outputText value="#{examSession.languageName}" /> umfasst <h:outputText value="#{examSession.numberOfWords}" /> Wörter.
                         <br />
                         Bist du bereit? Klicke auf den Button, um deine Prüfung zu starten!
                         <h:form>
                             <p:commandButton value="Prüfung starten" actionListener="#{examSession.startTest()}" update="outerPanel" />
                         </h:form>
                     </p:panel>
-                    
+
                     <p:panel header="Prüfung" rendered="#{examSession.examActive}">
-                        Prüfung läuft!
+                        <strong>Vokabel #{examSession.wordIndexForView} von #{examSession.numberOfWords}</strong>
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                <p:graphicImage name="images/tick_green.png" styleClass="correctnessIcon" rendered="#{examSession.lastWordResult ne null and examSession.lastWordResult}">
+                                    <p:effect type="pulsate" event="load" delay="500" />
+                                </p:graphicImage>
+                                <p:graphicImage name="images/close_red.png" styleClass="correctnessIcon" rendered="#{examSession.lastWordResult ne null and !examSession.lastWordResult}">
+                                    <p:effect type="pulsate" event="load" delay="500" />
+                                </p:graphicImage>
+                                <h:outputText value="Deine Antwort war korrekt!" rendered="#{examSession.lastWordResult ne null and examSession.lastWordResult}" />
+                                <h:outputText value="Deine Antwort war nicht korrekt!" rendered="#{examSession.lastWordResult ne null and !examSession.lastWordResult}" />
+                            </h:panelGrid>
+
+                            <p:panelGrid columns="2">
+
+                                <p:outputLabel value="#{examSession.baseLanguageName}" />
+                                <p:outputLabel value="#{examSession.currentWord.formattedNativeTerms}" />
+
+                                <p:outputLabel value="Kommentar" rendered="#{not empty examSession.currentWord.comment}" />
+                                <p:outputLabel value="#{examSession.currentWord.comment}" rendered="#{not empty examSession.currentWord.comment}" />
+
+                                <p:outputLabel value="#{examSession.languageName}" />
+                                <p:keyboard value="#{examSession.submittedWord}" placeholder="Antwort" rendered="#{examSession.keyboardLayout ne null}" layout="custom" layoutTemplate="#{examSession.keyboardLayout}" />
+                                <p:inputText value="#{examSession.submittedWord}" placeholder="Antwort" rendered="#{examSession.keyboardLayout eq null}" />
+
+                                <p:commandButton value="Antwort einreichen" actionListener="#{examSession.submitWord()}" update="outerPanel" />
+                            </p:panelGrid>
+                        </h:form>
+                    </p:panel>
+
+                    <p:panel header="Prüfung beendet" rendered="#{examSession.examCompleted}">
+                        Yo.
                     </p:panel>
                 </p:outputPanel>
             </ui:define>

@@ -133,7 +133,7 @@ public class Lections extends BaseController {
     }
     
     public void startExam(final Lection lection) {
-        examSession.setUpTest(wordManager.getWordsForLection(lection), lection.getLanguage());
+        examSession.setUpTest(wordManager.getWordsForLection(lection), lection.getLanguage(), lection.getBaseLanguage());
         
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("exam.xhtml");
