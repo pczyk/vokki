@@ -1,5 +1,8 @@
 package de.mupitu.vokki.presentation.session;
 
+import de.mupitu.vokki.business.statistics.boundary.ExamActionManager;
+import de.mupitu.vokki.business.statistics.entity.ExamAction;
+import de.mupitu.vokki.business.users.entity.User;
 import de.mupitu.vokki.business.words.boundary.WordManager;
 import de.mupitu.vokki.business.words.entity.Language;
 import java.io.Serializable;
@@ -7,6 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import de.mupitu.vokki.business.words.entity.Word;
 import de.mupitu.vokki.presentation.utils.PrimeFacesKeyboardUtils;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -29,6 +33,15 @@ public class ExamSession implements Serializable {
         ACTIVE,
         COMPLETED;
     }
+    
+    @Inject
+    private ExamActionManager examActionManager;
+    
+    @Inject
+    private WordManager wordManager;
+    
+    @Inject
+    private UserSession userSession;
     
     private ExamState examState = ExamState.INACTIVE;
 
@@ -131,7 +144,7 @@ public class ExamSession implements Serializable {
         wordIndex++;
 
         if (wordIndex >= words.size()) {
-            examState = ExamState.COMPLETED;
+            completeExam();
         }
     }
     
@@ -154,4 +167,29 @@ public class ExamSession implements Serializable {
     public String getAnswerForWord(final Word word) {
         return answers.get(word);
     }
+    private void completeExam() {
+        // word updates
+        final LocalDateTime now = LocalDateTime.now();
+        
+        words.stream().forEach(word -> {
+            word.setLastPracticed(now);
+            word.setNumberOfTests(word.getNumberOfTests() + 1);
+            
+            if(correctWords.contains(word)) {
+                word.setNumberOfCorrectAnswers(word.getNumberOfCorrectAnswers() + 1);
+            }
+        });
+        
+        wordManager.saveAll(words);
+        
+        // statistics
+        final User user = userSession.getCurrentUser();
+        final int numCorrect = correctWords.size();
+        final int numIncorrect = getNumberOfWords() - numCorrect;
+        final ExamAction examAction = new ExamAction(user, now, language, numCorrect, numIncorrect);
+        examActionManager.save(examAction);
+        
+        examState = ExamState.COMPLETED;
+    }
+    
 }

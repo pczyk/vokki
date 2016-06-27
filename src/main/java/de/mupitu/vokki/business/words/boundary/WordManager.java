@@ -33,6 +33,12 @@ public class WordManager {
     public Word save(final Word word) {
         return em.merge(word);
     }
+    
+    public List<Word> saveAll(final List<Word> words) {
+        words.stream().forEach(word -> save(word));
+        
+        return words;
+    }
 
     public void remove(final long id) {
         try {
