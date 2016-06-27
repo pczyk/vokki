@@ -1,5 +1,6 @@
 package de.mupitu.vokki.business.exams.boundary;
 
+import de.mupitu.vokki.business.exams.controller.StandardWordPromoter;
 import de.mupitu.vokki.business.statistics.boundary.ExamActionManager;
 import de.mupitu.vokki.business.statistics.entity.ExamAction;
 import de.mupitu.vokki.business.users.entity.User;
@@ -34,12 +35,15 @@ public class ExamsManager {
                 // word updates
         final LocalDateTime now = LocalDateTime.now();
         
+        StandardWordPromoter promoter = new StandardWordPromoter() {};
+        
         words.stream().forEach(word -> {
             word.setLastPracticed(now);
             word.setNumberOfTests(word.getNumberOfTests() + 1);
             
             if(correctWords.contains(word)) {
                 word.setNumberOfCorrectAnswers(word.getNumberOfCorrectAnswers() + 1);
+                promoter.promoteWord(word);
             }
         });
         

@@ -184,6 +184,7 @@ public class Word extends JPAEntity {
         word.setNativeTerms(nativeTerms);
         word.setLection(lection);
         word.setComment(comment);
+        word.setNextExerciseDate(LocalDate.now());
 
         return word;
     }
