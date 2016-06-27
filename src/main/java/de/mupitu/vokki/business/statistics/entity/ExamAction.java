@@ -9,19 +9,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 /**
  * Summary of an exam a user has taken
  */
+@Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+@NamedQuery(name = ExamAction.findAllForUser, query = "FROM ExamAction action WHERE action.user=:user")
 public class ExamAction extends JPAEntity {
 
+    private static final String PREFIX = "de.mupitu.vokki.business.statistics.entity.ExamAction";
+    public static final String findAllForUser = PREFIX + "findAllForUser";
+    
     @Id
     @GeneratedValue
     private long id;

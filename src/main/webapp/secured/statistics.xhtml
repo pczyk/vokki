@@ -23,6 +23,28 @@
                         <h:outputText value="#{loginAction.loginTime}" converter="localDateTimeLongConverter" />
                     </p:column>
                 </p:dataTable>
+                
+                <p:dataTable value="#{statistics.examActions}" var="examAction">
+                    <f:facet name="header">
+                        Prüfungen
+                    </f:facet>
+                    
+                    <p:column headerText="Zeitpunkt">
+                        <h:outputText value="#{examAction.localDateTime}" converter="localDateTimeLongConverter" />
+                    </p:column>
+                    
+                    <p:column headerText="Sprache">
+                        <h:outputText value="#{examAction.language.name}" />
+                    </p:column>
+                    
+                    <p:column headerText="Richtig">
+                        <h:outputText value="#{examAction.numberOfWordsCorrect}" />
+                    </p:column>
+                    
+                    <p:column headerText="Falsch">
+                        <h:outputText value="#{examAction.numberOfWordsIncorrect}" />
+                    </p:column>
+                </p:dataTable>                
             </ui:define>
         </ui:composition>        
     </h:body>

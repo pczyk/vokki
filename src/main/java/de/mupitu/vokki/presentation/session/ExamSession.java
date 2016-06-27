@@ -1,5 +1,6 @@
 package de.mupitu.vokki.presentation.session;
 
+import de.mupitu.vokki.business.exams.boundary.ExamsManager;
 import de.mupitu.vokki.business.statistics.boundary.ExamActionManager;
 import de.mupitu.vokki.business.statistics.entity.ExamAction;
 import de.mupitu.vokki.business.users.entity.User;
@@ -35,10 +36,7 @@ public class ExamSession implements Serializable {
     }
     
     @Inject
-    private ExamActionManager examActionManager;
-    
-    @Inject
-    private WordManager wordManager;
+    private ExamsManager examsManager;
     
     @Inject
     private UserSession userSession;
@@ -168,26 +166,8 @@ public class ExamSession implements Serializable {
         return answers.get(word);
     }
     private void completeExam() {
-        // word updates
-        final LocalDateTime now = LocalDateTime.now();
-        
-        words.stream().forEach(word -> {
-            word.setLastPracticed(now);
-            word.setNumberOfTests(word.getNumberOfTests() + 1);
-            
-            if(correctWords.contains(word)) {
-                word.setNumberOfCorrectAnswers(word.getNumberOfCorrectAnswers() + 1);
-            }
-        });
-        
-        wordManager.saveAll(words);
-        
-        // statistics
         final User user = userSession.getCurrentUser();
-        final int numCorrect = correctWords.size();
-        final int numIncorrect = getNumberOfWords() - numCorrect;
-        final ExamAction examAction = new ExamAction(user, now, language, numCorrect, numIncorrect);
-        examActionManager.save(examAction);
+        examsManager.processExamResult(user, language, words, correctWords);
         
         examState = ExamState.COMPLETED;
     }
