@@ -1,6 +1,7 @@
 package de.mupitu.vokki.presentation.session;
 
 import de.mupitu.vokki.business.exams.boundary.ExamsManager;
+import de.mupitu.vokki.business.exams.boundary.LevelEffect;
 import de.mupitu.vokki.business.statistics.boundary.ExamActionManager;
 import de.mupitu.vokki.business.statistics.entity.ExamAction;
 import de.mupitu.vokki.business.users.entity.User;
@@ -54,6 +55,8 @@ public class ExamSession implements Serializable {
     private List<Word> correctWords;
     private Map<Word, String> answers;
 
+    private Map<Word, LevelEffect> promotionResults;
+    
     public void setUpTest(final List<Word> words, final Language language, final Language baseLanguage) {
         Objects.requireNonNull(language, "parameter 'words' must not be null");
         Objects.requireNonNull(language, "parameter 'language' must not be null");
@@ -64,6 +67,8 @@ public class ExamSession implements Serializable {
         this.language = language;
         this.baseLanguage = baseLanguage;
 
+        promotionResults = null;
+        
         keyboardLayout = PrimeFacesKeyboardUtils.getLayoutTemplateForLanguage(language);
         lastWordResult = null;
         wordIndex = 0;
@@ -165,9 +170,14 @@ public class ExamSession implements Serializable {
     public String getAnswerForWord(final Word word) {
         return answers.get(word);
     }
+    
+    public LevelEffect getPromotionResultForWord(final Word word) {
+        return promotionResults.get(word);
+    }
+    
     private void completeExam() {
         final User user = userSession.getCurrentUser();
-        examsManager.processExamResult(user, language, words, correctWords);
+        promotionResults = examsManager.processExamResult(user, language, words, correctWords);
         
         examState = ExamState.COMPLETED;
     }

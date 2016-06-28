@@ -86,6 +86,10 @@
                                 <p:graphicImage name="images/tick_green.png" styleClass="correctnessIconSmall" rendered="#{examSession.isCorrect(word)}" />
                                 <p:graphicImage name="images/close_red.png" styleClass="correctnessIconSmall" rendered="#{!examSession.isCorrect(word)}" />
                             </p:column>
+                            
+                            <p:column headerText="Level">
+                                <h:outputText value="#{examSession.getPromotionResultForWord(word)}" />
+                            </p:column>
                         </p:dataTable>
                     </p:panel>
                 </p:outputPanel>
