@@ -7,3 +7,7 @@ body {
 div.ui-panel {
     margin-bottom: 10px;
 }
+
+.topMargin {
+    margin-top: 10px;
+}

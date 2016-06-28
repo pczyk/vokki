@@ -13,7 +13,7 @@
             <ui:define name="content">     
                 <p:growl autoUpdate="true" />
                 
-                <p:panel header="Benutzer">
+                <p:fieldset legend="Benutzerdaten">
                     <p:panelGrid columns="2">
                         <p:outputLabel for="username" value="Benutzername:" />
                         <h:outputText id="username" value="#{settings.user.username}" />
@@ -21,12 +21,12 @@
                         <p:outputLabel for="emailAddress" value="Benutzername:" />
                         <h:outputText id="emailAddress" value="#{settings.user.emailAddress}" />
 
-                        <p:outputLabel for="registered" value="Registrierung:" />
-                        <h:outputText id="registered" value="#{settings.user.registerDate}" />
+                        <p:outputLabel for="registerDate" value="Registrierung:" />
+                        <h:outputText id="registerDate" value="#{settings.user.registerDate}" converter="localDateLongConverter" />
                     </p:panelGrid>
-                </p:panel>
+                </p:fieldset>
 
-                <p:panel header="Passwort ändern" collapsed="true" toggleable="true">
+                <p:fieldset legend="Passwort ändern" collapsed="true" toggleable="true">
                     <h:form>
                         <p:panelGrid columns="2">
                             <p:outputLabel for="oldPassword" value="Altes Passwort:" />
@@ -39,9 +39,9 @@
                             <p:password id="newPasswordRepeat" required="true" feedback="false" value="#{settings.newPasswordRepeat}" />
                         </p:panelGrid>
                         
-                        <p:commandButton value="Passwort ändern" action="#{settings.changePassword()}" />
+                        <p:commandButton value="Passwort ändern" action="#{settings.changePassword()}" styleClass="topMargin" />
                     </h:form>
-                </p:panel>
+                </p:fieldset>
 
             </ui:define>
         </ui:composition>        

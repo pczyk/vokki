@@ -1,6 +1,5 @@
-/* Style override for PrimeFaces classes */
+/* Style overrides for PrimeFaces classes */
 
-.ui-link {
-    color: #232323;
-    text-decoration: none;
+fieldset.ui-fieldset, .ui-datatable {
+    margin-bottom: 12px;
 }
