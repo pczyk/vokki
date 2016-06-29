@@ -1,5 +1,6 @@
 package de.mupitu.vokki.business.words.boundary;
 
+import de.mupitu.vokki.business.users.entity.User;
 import de.mupitu.vokki.business.words.entity.Language;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -31,5 +32,11 @@ public class LanguageManager {
      */
     public Language findById(final long id) {
         return em.find(Language.class, id);
+    }
+    
+    public List<Language> getLanguagesForUser(final User user) {
+        return em.createNamedQuery(Language.findAllForUser, Language.class)
+                .setParameter("user", user)
+                .getResultList();
     }
 }
